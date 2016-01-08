@@ -1,0 +1,26 @@
+{
+  "name": "wesmoberly.me",
+  "version": "1.0.0",
+  "description": "The personal site of Wes Moberly",
+  "main": "index.php",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wesm87/WesMoberly.me.git"
+  },
+  "keywords": [
+    "WordPress",
+    "Wes",
+    "Moberly",
+    "developer",
+    "portfolio"
+  ],
+  "author": "Wes Moberly <wesm87@gmail.com>",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/wesm87/WesMoberly.me/issues?state=open"
+  },
+  "homepage": "https://github.com/wesm87/WesMoberly.me#readme"
+}
