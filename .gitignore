@@ -1,3 +1,6 @@
+# Archived WP files
+__wp-backup
+
 # Application
 web/app/plugins/*
 !web/app/plugins/.gitkeep
