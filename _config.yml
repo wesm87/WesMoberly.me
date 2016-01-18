@@ -37,6 +37,3 @@ gems:
 # Plugin configuration
 jekyll_timeago:
   prefix: 'Posted'
-
-portfolio_dir: "projects"
-related_project_keys: ["category", "technology"]
