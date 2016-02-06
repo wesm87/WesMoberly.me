@@ -14,7 +14,6 @@ cssMin       = require 'gulp-cssmin'
 
 # JS / CoffeeScript
 uglify       = require 'gulp-uglify'
-coffee       = require 'gulp-coffee'
 coffeelint   = require 'gulp-coffeelint'
 browserify   = require 'gulp-browserify'
 stripDebug   = require 'gulp-strip-debug'
