@@ -1,12 +1,27 @@
 # Archived WP files
 __wp-backup
 
+# System files
+.DS_Store
+
 # Node Package Manager
 node_modules
+
+# Sass
+.sass-cache
 
 # Vagrant
 bin
 .vagrant
+
+# Bundler
+Gemfile.lock
+
+# Jekyll
+.jekyll-metadata
+
+# Compiled assets
+_site/*
 
 # Log files
 *.log

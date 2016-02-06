@@ -24,15 +24,16 @@ permalink: pretty
 markdown: kramdown
 incremental: true
 
+exclude:
+  - node_modules
+  - package.json
+  - gulpfile.js
+  - gulpfile.coffee
+
 # Sass settings
 sass:
   sass_dir: assets/css/src
   style: compressed
-
-# Plugins
-gems:
- - jekyll-coffeescript
- - jekyll-timeago
 
 # Plugin configuration
 jekyll_timeago:
