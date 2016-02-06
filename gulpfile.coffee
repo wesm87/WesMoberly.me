@@ -15,163 +15,239 @@ cssMin       = require 'gulp-cssmin'
 # JS / CoffeeScript
 uglify       = require 'gulp-uglify'
 coffee       = require 'gulp-coffee'
+coffeelint   = require 'gulp-coffeelint'
 browserify   = require 'gulp-browserify'
 stripDebug   = require 'gulp-strip-debug'
-imageMin     = require 'gulp-imagemin'
 
 # Dev Tools
 browserSync  = require 'browser-sync'
 browserSync.create()
 
-# ------------------------------------------------------------------------
-# BEGIN CONFIG
-# ------------------------------------------------------------------------
 
-class Config
-	assetPaths:
+class GulpFile
+
+	debug: true
+
+	paths:
 		source: '_assets'
-		bower:  'bower_components'
+		dest:   '_site/_assets'
 		css:    'css'
 		js:     'js'
 		img:    'img'
 
 	constructor: ->
-		# Prepend asset folder paths with "_assets".
-		for assetType in [ 'css', 'js', 'img' ]
-			@assetPaths[ assetType ] = "#{@assetPaths.source}/#{@assetPaths[ assetType ]}"
 
-		# Store file paths in class property.
+		###
+		# Config
+		###
+
+		# Set our file paths.
+		this.setFilePaths()
+
+
+		###
+		# Tasks
+		###
+
+		# Compile assets.
+		this.task 'jekyll'
+		this.task 'css'
+		this.task 'js'
+
+		# Watch for file changes.
+		this.task 'watch'
+
+		# BrowserSync.
+		this.task 'browser-sync', 'browserSync'
+
+		# Watch + BrowserSync.
+		this.task 'sync'
+
+		# Linting & unit tests.
+		this.task 'lint'
+		this.task 'test'
+
+		# Build tasks.
+		this.task 'build'
+		this.task 'compile', 'build'
+
+		# Default task.
+		this.task 'default'
+
+	setFilePaths: =>
+
+		# Store file paths in a class property.
 		@files =
 			jekyll:
-				watch:  '**/*.html, **/*.md'
-				ignore: '_site/**/*'
+				watch:  "#{@paths.source}/**/*.html, #{@paths.source}/**/*.md"
+				ignore: "#{@paths.dest}/**/*"
 			css:
-				build: "_site/#{@assetPaths.css}"
-				watch: "#{@assetPaths.css}/**/*.scss"
-				ignore: "!#{@assetPaths.css}/**/_*.scss"
+				dest:   "#{@paths.dest}/#{@paths.css}"
+				watch:  "#{@paths.source}/#{@paths.css}/**/*.scss"
+				ignore: "!#{@paths.source}/#{@paths.css}/**/_*.scss"
 			js:
-				build: "_site/#{@assetPaths.js}"
-				watch: "#{@assetPaths.js}/**/*.coffee"
+				dest:  "#{@paths.dest}/#{@paths.js}"
+				watch: "#{@paths.source}/#{@paths.js}/**/*.coffee"
 
 		# Update file paths where necessary.
 		for assetType in [ 'jekyll', 'css', 'js' ]
+
 			files = @files[ assetType ]
+			return unless files?
 
-			if ( files? )
-
-				# Create source file list
-				files.src = [
-					files.src,
-					files.watch,
-					files.ignore
-				].filter( ( val ) -> return ( val? && val ) )
-
-				if ( files.libs && files.src )
-					files.src = files.libs.concat( files.src )
+			# Create source file list.
+			files.src = [
+				files.src
+				files.watch
+				files.ignore
+			].filter( ( val ) -> return val? && val )
 
 
 			@files[ assetType ] = files
 
-config = new Config
+	notify: ( message ) ->
 
-# ------------------------------------------------------------------------
-# END CONFIG
-# ------------------------------------------------------------------------
+		return unless message?
 
-# ------------------------------------------------------------------------
-# BEGIN TASKS
-# ------------------------------------------------------------------------
+		console.log( message ) if @debug
+		browserSync.notify( message )
 
-gulp.task( 'browser-sync', ->
+	task: ( name, task = null ) =>
 
-	return browserSync.init(
-		logPrefix: 'WesMoberly'
-		# proxy: 'wesmoberly.me.dev'
-		# open: 'external'
-		# xip: true
-		server: {
-			baseDir: '_site'
-		}
-	)
-)
+		# If the task callback is a string, see if it matches an instance method.
+		task = this[ task ] if typeof task is 'string'
 
-gulp.task( 'jekyll', ( done ) ->
+		# See if we have a valid task callback.
+		if ! task?
 
-	browserSync.notify( 'Running Jekyll build' )
+			# If not, see if the task name matches an instance method.
+			if typeof this[ name ] is 'function'
 
-	return cp
-		.spawn( 'jekyll', [ 'build', '--config=_config.yml' ], { stdio: 'inherit'} )
-		.on( 'close', done )
-)
+				# We found a matching instance method, let's use that.
+				task = this[ name ]
+			else
 
-gulp.task( 'css', ->
+				# No match found, let's bail.
+				return
 
-	browserSync.notify( 'Compiling Sass files' )
+		# Create the Gulp task.
+		gulp.task name, ( done ) =>
 
-	sassOptions =
-		precision: 10,
-		outputStyle: 'expanded'
-		includePaths: [ 'node_modules' ]
+			# Run the task.
+			result = task()
 
-	return gulp
-		.src  config.files.css.src
-		.pipe sourcemaps.init()
-		.pipe sass( sassOptions )
-		.pipe concat( 'all.css' )
-		.pipe prefix( 'last 3 versions', '> 1%' )
-		.pipe gulp.dest( config.files.css.build )
-		.pipe cssMin()
-		.pipe rename( suffix: '.min' )
-		.pipe sourcemaps.write( './maps' )
-		.pipe gulp.dest( config.files.css.build )
-		.pipe browserSync.stream( once: true )
-)
+			# If the task returned a function then call that too.
+			# (e.g. `gulp.series` or `gulp.parallel`)
+			result() if typeof result is 'function'
 
+			# Let Gulp know we're done.
+			done()
 
-###
-# TODO: Get sourcemaps working with Browserify.
-###
-gulp.task( 'js', ->
-
-	browserSync.notify( 'Compiling CoffeeScript files' )
-
-	return gulp
-		.src  config.files.js.src, { read: false }
-		.pipe sourcemaps.init()
-		.pipe browserify({ transform: ['coffeeify'], extensions: ['.coffee'] })
-		.pipe concat( 'all.js' )
-		.pipe gulp.dest( config.files.js.build )
-		.pipe uglify()
-		.pipe rename( suffix: '.min' )
-		.pipe sourcemaps.write( './maps' )
-		.pipe gulp.dest( config.files.js.build )
-		.pipe browserSync.stream( once: true )
-)
-
-# Rerun the task when a file changes
-gulp.task( 'watch', ->
-
-	tasks = [
-		'jekyll',
-		'css',
-		'js'
+	default: => gulp.series [
+		this.build
+		this.sync
 	]
 
-	for task in tasks
-		watchFiles = config.files[ task ].watch
+	build: => gulp.series [
+		this.jekyll
+		this.css
+		this.js
+		this.lint
+		# this.test
+	]
 
-		if ( config.files[ task ].watch )
-			gulp.watch( watchFiles, gulp.parallel( task ) )
-)
+	sync: => gulp.parallel [
+		this.watch
+		this.browserSync
+	]
 
-# Build tasks
-gulp.task( 'build', gulp.series( 'jekyll', 'css', 'js' ) )
-gulp.task( 'compile', gulp.series( 'jekyll', 'css', 'js' ) )
+	watch: =>
 
-# The default task (called when you run `gulp` from cli)
-gulp.task( 'default', gulp.series( 'build', gulp.parallel( 'watch', 'browser-sync' ) ) )
+		gulp.watch( @files.jekyll.watch, this.jekyll )
+		gulp.watch( @files.css.watch,    this.js   )
+		gulp.watch( @files.js.watch,     this.css )
+
+	browserSync: ->
+
+		browserSync.init(
+			logPrefix: 'WesMoberly'
+			server:
+				baseDir: '_site'
+		)
+
+	jekyll: =>
+
+		this.notify( 'Running Jekyll build' )
+
+		command = [ 'build', '--config=_config.yml' ]
+		cp.spawn( 'jekyll', command, stdio: 'inherit' )
+
+	css: =>
+
+		this.notify( 'Compiling Sass files' )
+
+		sassOptions =
+			precision: 10
+			outputStyle: 'expanded'
+			includePaths: [ 'node_modules' ]
+
+		gulp
+			.src  @files.css.src
+			.pipe sourcemaps.init()
+			.pipe sass( sassOptions )
+			.pipe concat( 'all.css' )
+			.pipe prefix( 'last 3 versions', '> 1%' )
+			.pipe gulp.dest( @files.css.dest )
+			.pipe cssMin()
+			.pipe rename( suffix: '.min' )
+			.pipe sourcemaps.write( './maps' )
+			.pipe gulp.dest( @files.css.dest )
+			.pipe browserSync.stream( once: true )
+
+	###
+	# TODO: Get sourcemaps working with Browserify.
+	###
+	js: =>
+
+		this.notify( 'Compiling CoffeeScript files' )
+
+		gulp
+			.src  @files.js.src, read: false
+			.pipe sourcemaps.init()
+			.pipe browserify( transform: ['coffeeify'], extensions: ['.coffee'] )
+			.pipe concat( 'all.js' )
+			.pipe gulp.dest( @files.js.dest )
+			.pipe uglify()
+			.pipe rename( suffix: '.min' )
+			.pipe sourcemaps.write( './maps' )
+			.pipe gulp.dest( @files.js.dest )
+			.pipe browserSync.stream( once: true )
+
+	###
+	# TODO: Add Sass and Markdown linting. See if a linter exists for Liquid.
+	###
+	lint: =>
+		this.coffeelint()
+
+	###
+	# TODO: Implement unit tests
+	###
+	test: =>
+		this.notify( 'Running unit tests' )
+
+	coffeelint: =>
+
+		this.notify( 'Linting CoffeeScript files' )
+
+		gulp
+			.src  @files.js.src
+			.pipe coffeelint()
+			.pipe coffeelint.reporter( 'coffeelint-stylish' )
 
 
-# ------------------------------------------------------------------------
-# END TASKS
-# ------------------------------------------------------------------------
+
+
+###
+# Init
+###
+new GulpFile
