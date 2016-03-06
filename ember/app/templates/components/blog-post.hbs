@@ -1,0 +1,33 @@
+
+<h2 class="page-section__heading">
+	{{model.title}}
+
+	{{#if session.isAuthenticated}}
+		<small>
+			{{#if isEditPage}}
+				{{link-to 'Back' 'posts.post' model}}
+			{{else}}
+				{{link-to 'Edit' 'posts.post.edit' model}}
+			{{/if}}
+		</small>
+	{{/if}}
+</h2>
+
+
+<div class="post__meta">
+	<p>
+		<strong>Posted</strong> {{moment-calendar model.datePosted}}
+		|
+		<strong>Modified</strong> {{moment-calendar model.dateModified}}
+	</p>
+</div>
+
+<div class="post__content">
+	{{#if isEditPage}}
+		{{markdown-editor content=model.content}}
+	{{else}}
+		{{markdown-content content=model.content}}
+	{{/if}}
+</div>
+
+{{yield}}
