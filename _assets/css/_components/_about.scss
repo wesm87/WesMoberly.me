@@ -1,0 +1,8 @@
+.contact-links {
+	@extend .nav;
+	@extend .nav-inline;
+
+	.contact-link {
+		@extend .nav-link;
+	}
+}

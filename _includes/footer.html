@@ -1,69 +1,35 @@
-<footer class="site-footer">
+		</div><!-- /.container -->
 
-  <div class="wrapper">
+		<footer class="site-footer bg-inverse">
 
-    <h2 class="footer-heading">{{ site.title }}</h2>
+			<div class="container">
+				<div class="row">
+					<div class="col-xs-6 col-sm-4">
+						<p>
+							Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+						</p>
+					</div>
+					<div class="col-xs-6 col-sm-4">
+						<p>
+							Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+						</p>
+					</div>
+					<div class="col-xs-6 col-sm-4">
+						<p>
+							Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+						</p>
+					</div>
+				</div>
+			</div>
 
-    <div class="footer-col-wrapper">
-      <div class="footer-col footer-col-1">
-        <ul class="contact-list">
-          <li>{{ site.title }}</li>
-          <li><a href="mailto:{{ site.email }}">{{ site.email }}</a></li>
-        </ul>
-      </div>
+		</footer>
 
-      <div class="footer-col footer-col-2">
-        <ul class="social-media-list">
-          {% if site.github_username %}
-          <li>
-            {% include icon-github.html username=site.github_username %}
-          </li>
-          {% endif %}
+		<footer class="site-sub-footer">
+			<p class="copyright">
+				© Wes Moberly, 2016
+			</p>
+		</footer>
 
-          {% if site.twitter_username %}
-          <li>
-            {% include icon-twitter.html username=site.twitter_username %}
-          </li>
-          {% endif %}
-        </ul>
-      </div>
-
-      <div class="footer-col footer-col-3">
-        <p>{{ site.description }}</p>
-      </div>
-    </div>
-
-  </div>
-
-</footer>
-
-<script type="text/template" name="home">
-	<h1>Home</h1>
-	<p><a href="#/portfolio">Portfolio &rarr;</a></p>
-	<p><a href="#/blog">Blog &rarr;</a></p>
-	<p><a href="#/contact">Contact &rarr;</a></p>
-</script>
-
-<script type="text/template" name="portfolio">
-	<h1>Portfolio</h1>
-	<p><a href="#/">Home &rarr;</a></p>
-	<p><a href="#/blog">Blog &rarr;</a></p>
-	<p><a href="#/contact">Contact &rarr;</a></p>
-</script>
-
-<script type="text/template" name="blog">
-	<h1>Blog</h1>
-	<p><a href="#/">Home &rarr;</a></p>
-	<p><a href="#/portfolio">Portfolio &rarr;</a></p>
-	<p><a href="#/contact">Contact &rarr;</a></p>
-</script>
-
-<script type="text/template" name="contact">
-	<h1>Contact</h1>
-	<p><a href="#/">Home &rarr;</a></p>
-	<p><a href="#/portfolio">Portfolio &rarr;</a></p>
-	<p><a href="#/blog">Blog &rarr;</a></p>
-</script>
-
-
-<script src="{{ '/_assets/js/all.min.js' | prepend: site.baseurl }}"
+		<script src="{{ '/_assets/js/all.min.js' | prepend: site.baseurl }}"></script>
+	</body>
+</html>

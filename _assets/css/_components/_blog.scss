@@ -1,0 +1,7 @@
+.blog-posts {
+	@extend .row;
+}
+
+.blog-post {
+	@extend .col-md-6;
+}

@@ -2,38 +2,45 @@
   "name": "wesmoberly.me",
   "version": "1.0.0",
   "description": "The personal site of Wes Moberly",
-  "main": "index.php",
-  "devDependencies": {
-    "backbone": "^1.2.3",
+  "main": "index.html",
+  "private": true,
+  "directories": {
+    "doc": "doc",
+    "test": "tests"
+  },
+  "dependencies": {
     "bootstrap": "^4.0.0-alpha.2",
+    "jquery": "^2.2.0",
+    "tether": "^1.1.1"
+  },
+  "devDependencies": {
     "browser-sync": "^2.10.0",
     "coffee-script": "^1.10.0",
     "coffeeify": "^2.0.1",
-    "ember-cli": "^1.13.15",
     "gulp": "github:gulpjs/gulp#4.0",
     "gulp-autoprefixer": "^3.1.0",
     "gulp-browserify": "^0.5.1",
     "gulp-coffeelint": "^0.6.0",
     "gulp-concat": "^2.6.0",
     "gulp-cssmin": "^0.1.7",
+    "gulp-merge-media-queries": "^0.2.1",
+    "gulp-modernizr": "^1.0.0-alpha",
     "gulp-rename": "^1.2.2",
     "gulp-sass": "^2.1.0",
     "gulp-scss-lint": "^0.3.9",
     "gulp-sourcemaps": "^1.6.0",
     "gulp-strip-debug": "^1.1.0",
     "gulp-uglify": "^1.5.1",
-    "jquery": "^2.2.0",
-    "underscore": "^1.8.3"
-  },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "gulp-uncss": "^1.0.4"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/wesm87/WesMoberly.me.git"
   },
+  "engines": {
+    "node": ">= 0.10.0"
+  },
   "keywords": [
-    "WordPress",
     "Wes",
     "Moberly",
     "developer",

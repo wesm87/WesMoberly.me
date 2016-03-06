@@ -1,0 +1,13 @@
+.contact-form {
+	text-align: center;
+}
+
+.contact__submit-button {
+	@extend .btn;
+	@extend .btn-danger;
+	@extend .btn-lg;
+	@extend .btn-block;
+
+	max-width: 20rem;
+	// margin: 0 auto;	
+}
