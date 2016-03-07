@@ -1,27 +1,33 @@
-# Archived WP files
-__wp-backup
-
-# System files
+# OS X system files
 .DS_Store
+.AppleDouble
+.LSOverride
+._*
 
-# Node Package Manager
+# Windows system files
+Thumbs.db
+ehthumbs.db
+
+# Dependencies / vendor packages
 node_modules
+bower_components
+**/styles/_vendor
 
-# Sass
-.sass-cache
-
-# Vagrant
-bin
-.vagrant
-
-# Bundler
-Gemfile.lock
-
-# Jekyll
-.jekyll-metadata
 
 # Compiled assets
-_site/*
+dist
+tmp
+
+# Code coverage
+/coverage/*
 
 # Log files
 *.log
+npm-debug.log*
+
+# Cache folders
+.sass-cache
+.npm
+
+# Misc
+connect.lock

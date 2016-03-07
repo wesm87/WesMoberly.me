@@ -1,0 +1,81 @@
+{
+  "name": "wesm-ember-app",
+  "version": "1.0.0",
+  "description": "The Ember app that powers the front-end of my website",
+  "main": "dist/index.html",
+  "private": true,
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "build": "ember build",
+    "start": "ember server",
+    "test": "ember test"
+  },
+  "engines": {
+    "node": ">= 0.10.0"
+  },
+  "author": "Wes Moberly <wesm87@gmail.com>",
+  "license": "MIT",
+  "homepage": "https://github.com/wesm87/WesMoberly.me#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wesm87/WesMoberly.me.git"
+  },
+  "bugs": {
+    "url": "https://github.com/wesm87/WesMoberly.me/issues?state=open"
+  },
+  "keywords": [
+    "Wes",
+    "Moberly",
+    "developer",
+    "portfolio",
+    "PHP",
+    "MySQL",
+    "WordPress",
+    "Laravel",
+    "Ruby",
+    "Rails",
+    "CoffeeScript",
+    "Backbone",
+    "Ember",
+    "React",
+    "Node",
+    "Express",
+    "MongoDB"
+  ],
+  "devDependencies": {
+    "broccoli-asset-rev": "^2.2.0",
+    "ember-ajax": "0.7.1",
+    "ember-cli": "^2.4.1",
+    "ember-cli-app-version": "^1.0.0",
+    "ember-cli-autoprefixer": "0.5.0",
+    "ember-cli-babel": "^5.1.5",
+    "ember-cli-blanket": "0.8.0",
+    "ember-cli-coffeescript": "1.13.2",
+    "ember-cli-dependency-checker": "^1.2.0",
+    "ember-cli-htmlbars": "^1.0.1",
+    "ember-cli-htmlbars-inline-precompile": "^0.3.1",
+    "ember-cli-inject-live-reload": "^1.3.1",
+    "ember-cli-moment-shim": "1.0.0",
+    "ember-cli-qunit": "^1.2.1",
+    "ember-cli-release": "0.2.8",
+    "ember-cli-sass": "5.2.1",
+    "ember-cli-sri": "^2.1.0",
+    "ember-cli-uglify": "^1.2.0",
+    "ember-data": "^2.4.0",
+    "ember-disable-proxy-controllers": "^1.0.1",
+    "ember-export-application-global": "^1.0.4",
+    "ember-link-action": "0.0.34",
+    "ember-load-initializers": "^0.5.0",
+    "ember-moment": "6.0.0",
+    "ember-resolver": "^2.0.3",
+    "ember-simple-auth": "1.0.1",
+    "liquid-fire": "0.23.0",
+    "loader.js": "^4.0.0",
+    "moment": "2.11.2",
+    "moment-timezone": "0.5.0",
+    "torii": "0.6.1",
+    "ui-navigator-service": "0.2.7"
+  }
+}

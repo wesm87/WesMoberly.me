@@ -1,0 +1,60 @@
+.page-content {
+	
+}
+
+.page-section {
+	margin-top: 2rem;
+	margin-bottom: 2rem;
+}
+
+.page-section__heading {
+	padding-bottom: 1.666666rem;
+	margin-bottom: 1.666666rem;
+	border-bottom: 3px solid $color-dark;
+	text-shadow: 1px 1px 0 darken( $gray-lighter, 5% );
+}
+
+.page-section__subheading {
+	margin: 1rem 0;
+}
+
+.card {
+	margin-bottom: 1rem;
+}
+
+.card-header,
+.card-footer {
+	margin-bottom: 0;
+	border-bottom: 0;
+	color: $color-light;
+	background: $color-dark;
+}
+
+.card-group {
+	.card {
+		.card-header,
+		.card-footer {
+			border-radius: 0;
+		}
+
+		&:first-child {
+			.card-header {
+				border-top-left-radius: $border-radius;
+			}
+
+			.card-footer {
+				border-bottom-left-radius: $border-radius;
+			}
+		}
+
+		&:last-child {
+			.card-header {
+				border-top-right-radius: $border-radius;
+			}
+
+			.card-footer {
+				border-bottom-right-radius: $border-radius;
+			}
+		}
+	}
+}
