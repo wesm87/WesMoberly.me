@@ -1,4 +1,5 @@
 `import Ember from 'ember'`
+`import ENV from 'wesm-ember-app/config/environment'`
 
 BlogPostComponent = Ember.Component.extend(
 
@@ -17,14 +18,18 @@ BlogPostComponent = Ember.Component.extend(
 
 	navigator: Ember.inject.service()
 
+	isAuthenticated: Ember.computed 'isAuthenticated', ->
+		return true if ENV.environment == 'development'
+		@get( 'session' )?.isAuthenticated
+
 	isEditPage: Ember.computed 'isEditPage', ->
-		@get( 'navigator' ).currentNode == 'edit'
+		@get( 'navigator' )?.currentNode == 'edit'
 
 	didRender: ->
 
-		@_super( arguments... )
+		@_super arguments...
 
-		this.$( 'pre code' ).each ( index, element ) ->
+		@$( 'pre code' ).each ( index, element ) ->
 			hljs.highlightBlock( element )
 
 )

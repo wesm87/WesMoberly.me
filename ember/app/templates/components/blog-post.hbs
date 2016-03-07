@@ -2,7 +2,7 @@
 <h2 class="page-section__heading">
 	{{model.title}}
 
-	{{#if session.isAuthenticated}}
+	{{#if isAuthenticated}}
 		<small>
 			{{#if isEditPage}}
 				{{link-to 'Back' 'posts.post' model}}
