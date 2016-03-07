@@ -12,23 +12,23 @@ module.exports = function( defaults ) {
 				css: {
 					'app': '/assets/css/app.css'
 				},
-				js: '/assets/js/app.js'
+				js: '/assets/js/app.js',
 			},
 			vendor: {
 				css: '/assets/css/vendor.css',
-				js: '/assets/js/vendor.js'
-			}
+				js: '/assets/js/vendor.js',
+			},
 		},
 
 		sassOptions: {
 			includePaths: [
-				`${defaults.project.bowerDirectory}/bootstrap/scss`
-			]
+				`${defaults.project.bowerDirectory}/bootstrap/scss`,
+			],
 		},
 
 		autoprefixer: {
 			browsers: [ 'last 3 versions', 'ie > 8', '> 5%' ],
-			remove: false
+			remove: false,
 		},
 
 	});

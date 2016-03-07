@@ -1,13 +1,14 @@
 ---
 language: node_js
 node_js:
-  - "0.12"
+  - "stable"
 
 sudo: false
 
 cache:
   directories:
     - ember/node_modules
+    - ember/bower_components
 
 before_install:
   - export PATH=/usr/local/phantomjs-2.0.0/bin:$PATH
