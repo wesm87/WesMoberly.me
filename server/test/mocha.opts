@@ -1,0 +1,5 @@
+--reporter  spec
+--require   chai
+--require   coffee-coverage/register-istanbul
+--compilers coffee:coffee-script/register
+--recursive
