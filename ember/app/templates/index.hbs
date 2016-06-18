@@ -11,9 +11,8 @@
 
 		<div class="card-deck card-group--skills">
 			<div class="card">
-				<h3 class="card-header h1 text-xs-center">
-					<i class="fa fa-5x fa-wordpress"></i>
-					<br>
+				<h3 class="card-header text-sm-center">
+					<i class="fa fa-wordpress"></i>
 					WordPress
 				</h3>
 				<ul class="skill-list card__list list-group list-group-flush">
@@ -29,9 +28,8 @@
 				</ul>
 			</div>
 			<div class="card">
-				<h3 class="card-header h1 text-xs-center">
-					<i class="fa fa-5x fa-cloud-upload"></i>
-					<br>
+				<h3 class="card-header text-sm-center">
+					<i class="fa fa-cloud-upload"></i>
 					Web Apps
 				</h3>
 				<ul class="list-group list-group-flush">
@@ -47,9 +45,8 @@
 				</ul>
 			</div>
 			<div class="card">
-				<h3 class="card-header h1 text-xs-center">
-					<i class="fa fa-5x fa-code"></i>
-					<br>
+				<h3 class="card-header text-sm-center">
+					<i class="fa fa-code"></i>
 					Front-end
 				</h3>
 				<ul class="list-group list-group-flush">
@@ -72,21 +69,38 @@
 
 		<div class="contact-links">
 			<a class="contact-link" href="https://github.com/wesm87">
-				<i class="icon icon-github"></i> GitHub
+				<i class="fa fa-github"></i> GitHub
 			</a>
 			<a class="contact-link" href="https://www.linkedin.com/in/wes-moberly-0ba41261">
-				<i class="icon icon-linkedin"></i> LinkedIn
+				<i class="fa fa-linkedin"></i> LinkedIn
 			</a>
 			<a class="contact-link" href="mailto:wesm87@gmail.com">
-				<i class="icon icon-at"></i> Email
+				<i class="fa fa-at"></i> Email
 			</a>
 		</div>
 	</section>
 
+	{{markdown-content content='
+### This is a test
+
+```js
+var testVar = "hello";
+console.log( testVar );
+function soSomething() {
+	doSomethingElse();
+}
+```
+'}}
+
 	{{#if model.portfolioItems}}
 
 		<section class="page-section page-section__portfolio">
-			<h2 class="page-section__heading">Portfolio</h2>
+			<h2 class="page-section__heading">
+				Portfolio
+				{{#link-to 'portfolio'}}
+					<small>View All <i class="fa fa-arrow-right"></i></small>
+				{{/link-to}}
+			</h2>
 			<div class="portfolio-items">
 
 				{{#each (limit model.portfolioItems 6) as |item|}}

@@ -1,3 +1,21 @@
+.card-group--skills {
+	.card-header {
+		font-size: $font-size-h1;
+
+		@include media-breakpoint-up( sm ) {
+			i {
+				display: block;
+				margin: 0.5rem 0;
+				font-size: 3em;
+			}
+		}
+
+		@include media-breakpoint-up( lg ) {
+			font-size: $font-size-super;
+		}
+	}
+}
+
 .contact-links {
 	@extend .nav;
 	@extend .nav-inline;
