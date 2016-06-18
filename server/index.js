@@ -2,4 +2,4 @@
 'use strict';
 
 require( 'coffee-script/register' );
-require( './express-server-daemon.coffee' );
+require( './app/' );

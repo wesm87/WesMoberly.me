@@ -13,6 +13,9 @@ BlogPost = require "#{ __serverPath }/models/blog-post"
 # Create router
 router = express.Router()
 
+BlogPost.register( router, '/blog' )
+
+###
 # Default middleware
 router.use ( req, res, next ) ->
 
@@ -47,7 +50,7 @@ router.use ( req, res, next ) ->
 	# Move on to the next middleware
 	next()
 
-### CRUD Endpoints ###
+## CRUD Endpoints ##
 
 # /api/v1/blog
 router.route '/'
@@ -130,5 +133,6 @@ router.route '/:post_id'
 			else
 				res.status( 204 ).sendResults( results )
 		)
+###
 
 module.exports = router

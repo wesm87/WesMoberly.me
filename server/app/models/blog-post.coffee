@@ -4,8 +4,9 @@
 
 # Dependencies
 slugify       = require 'slug'
-mongoose      = require 'mongoose'
+restful       = require 'node-restful'
 autoIncrement = require 'mongoose-auto-increment'
+mongoose      = restful.mongoose
 
 
 # Schema options
@@ -42,4 +43,8 @@ schema.plugin( autoIncrement.plugin,
 	startAt: 1
 )
 
-module.exports = mongoose.model( 'post', schema )
+model = restful.model( 'post', schema )
+
+model.methods([ 'get', 'post', 'put', 'delete' ])
+
+module.exports = model

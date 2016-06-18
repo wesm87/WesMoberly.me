@@ -2,13 +2,13 @@
   "name": "wesm-express-app",
   "version": "1.0.0",
   "description": "The Express app that powers the back-end of my website",
-  "main": "app.coffee",
+  "main": "index.js",
   "private": true,
   "bin": {
     "express-server-daemon": "bin/express-server-daemon"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha && istanbul report lcov json html text text-summary",
     "start": "nodemon"
   },
   "engines": {
@@ -52,6 +52,17 @@
     "mongoose": "^4.4.4",
     "mongoose-auto-increment": "^5.0.1",
     "multer": "^1.1.0",
+    "node-restful": "^0.2.5",
     "slug": "^0.9.1"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "coffee-coverage": "^1.0.1",
+    "istanbul": "^0.4.3",
+    "mocha": "^2.4.5",
+    "node-fieldbook": "^1.1.1",
+    "sinon": "^1.17.3",
+    "supertest": "^1.2.0",
+    "zombie": "^4.2.1"
   }
 }

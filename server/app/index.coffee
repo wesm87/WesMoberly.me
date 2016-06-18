@@ -7,6 +7,9 @@ path       = require 'path'
 express    = require 'express'
 bodyParser = require 'body-parser'
 
+# Server port number
+global.__serverPort = process.env.PORT || 4500
+
 # Paths to server and ember app directories
 global.__serverPath = __dirname
 global.__emberPath  = "#{ path.dirname __serverPath }/ember/dist"
@@ -35,16 +38,22 @@ app.use /^(?!\/api\/).*$/, [
 	require './routers/ember'
 ]
 
-# Listen for requests
-server = app.listen '4500', ->
+startServer = ->
+	# Listen for requests
+	server = app.listen __serverPort, ->
 
-	console.log 'Server running at http://%s:%d/', 'localhost', 4500
+		console.log 'Server running at http://%s:%d/', 'localhost', __serverPort
 
-	# Make sure we're not running as root
-	if process.getgid() == 0
-		process.setgid 'nobody'
-		process.setuid 'nobody'
+		# Make sure we're not running as root
+		if process.getgid() == 0
+			process.setgid 'nobody'
+			process.setuid 'nobody'
 
-# Shut down the server when a SIGTERM is received
-process.on 'SIGTERM', ->
-	server?.close -> process.disconnect?()
+	# Shut down the server when a SIGTERM is received
+	process.on 'SIGTERM', ->
+		server?.close -> process.disconnect?()
+
+if ! module.parent
+	startServer()
+
+module.exports = startServer
