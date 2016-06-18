@@ -10,9 +10,11 @@
     "highlightjs": "^9.1.0",
     "marked": "^0.3.5",
     "simplemde": "^1.10.0",
-    "filament-sticky": "^0.1.6"
+    "filament-sticky": "^0.1.6",
+    "selectize": "miguelcobain/selectize.js#master"
   },
   "devDependencies": {
-    "blanket": "~1.1.5"
+    "blanket": "~1.1.5",
+    "prism": "^1.4.1"
   }
 }

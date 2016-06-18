@@ -53,7 +53,6 @@ module.exports = function( defaults ) {
 	// Hightlight.js
 	app.import( `${app.bowerDirectory}/highlightjs/styles/monokai.css` );
 	app.import( `${app.bowerDirectory}/highlightjs/highlight.pack.min.js` );
-	// app.import( `${app.bowerDirectory}/code-highlight-linenums/code-highlight-linenums.js` );
 
 	// Marked
 	app.import( `${app.bowerDirectory}/marked/marked.min.js` );

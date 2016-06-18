@@ -13,7 +13,7 @@
     "test": "ember test"
   },
   "engines": {
-    "node": ">= 0.10.0"
+    "node": "stable"
   },
   "author": "Wes Moberly <wesm87@gmail.com>",
   "license": "MIT",
@@ -23,7 +23,7 @@
     "url": "git+https://github.com/wesm87/WesMoberly.me.git"
   },
   "bugs": {
-    "url": "https://github.com/wesm87/WesMoberly.me/issues?state=open"
+    "url": "https://github.com/wesm87/WesMoberly.me/issues"
   },
   "keywords": [
     "Wes",
@@ -52,7 +52,6 @@
     "ember-cli-autoprefixer": "0.5.0",
     "ember-cli-babel": "^5.1.5",
     "ember-cli-blanket": "0.8.0",
-    "ember-cli-coffeescript": "1.13.2",
     "ember-cli-dependency-checker": "^1.2.0",
     "ember-cli-htmlbars": "^1.0.1",
     "ember-cli-htmlbars-inline-precompile": "^0.3.1",
@@ -61,6 +60,7 @@
     "ember-cli-qunit": "^1.2.1",
     "ember-cli-release": "0.2.8",
     "ember-cli-sass": "5.2.1",
+    "ember-cli-selectize": "0.5.2",
     "ember-cli-sri": "^2.1.0",
     "ember-cli-uglify": "^1.2.0",
     "ember-data": "^2.4.0",
