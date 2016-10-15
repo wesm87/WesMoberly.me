@@ -1,0 +1,1 @@
+module.exports = {"main":{"js":"/main.js?3bc602232036fbeb536c"}};
