@@ -22,6 +22,6 @@ indent_size = 2
 [*.{diff,md}]
 trim_trailing_whitespace = false
 
-[*.{json,yml}]
+[*.{json,yml,eslintrc.*}]
 indent_size = 2
 indent_style = space
