@@ -15,7 +15,6 @@ router = express.Router()
 
 BlogPost.register( router, '/blog' )
 
-###
 # Default middleware
 router.use ( req, res, next ) ->
 
@@ -133,6 +132,5 @@ router.route '/:post_id'
 			else
 				res.status( 204 ).sendResults( results )
 		)
-###
 
 module.exports = router

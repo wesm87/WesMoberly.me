@@ -11,8 +11,8 @@ bodyParser = require 'body-parser'
 global.__serverPort = process.env.PORT || 4500
 
 # Paths to server and ember app directories
-global.__serverPath = __dirname
-global.__emberPath  = "#{ path.dirname __serverPath }/ember/dist"
+global.__serverPath = path.resolve( './app' )
+global.__emberPath  = path.resolve( '../ember/dist' )
 
 # Main app instance
 app = express()
@@ -25,17 +25,17 @@ app.use bodyParser.urlencoded( extended: true )
 app.use bodyParser.json()
 
 # Create database connection
-dbConnection = require './database/connection'
+dbConnection = require "#{ __serverPath }/database/connection"
 
 # REST API router
 app.use '/api/v1', [
-	require './middlewares/rest-api'
-	require './routers/rest-api'
+	require "#{ __serverPath }/middlewares/rest-api"
+	require "#{ __serverPath }/routers/rest-api"
 ]
 
 # Front-end router for non-API requests
 app.use /^(?!\/api\/).*$/, [
-	require './routers/ember'
+	require "#{ __serverPath }/routers/ember"
 ]
 
 startServer = ->
