@@ -1,0 +1,15 @@
+<template name="layout">
+	<paper-header-panel mode="waterfall-tall" class="flex" condenses keep-condensed-header>
+		<paper-toolbar class="site-header medium-tall">
+			{{> header}}
+		</paper-toolbar>
+
+		<main class="site-content">
+			{{> yield }}
+		</main>
+
+		<footer class="site-footer">
+			{{> footer}}
+		</footer>
+	</paper-header-panel>
+</template>

@@ -1,0 +1,24 @@
+{
+    "polyfill": "/bower_components/webcomponentsjs/webcomponents.min.js",
+    "useShadowDom": true,
+    "imports": [
+        "/bower_components/iron-flex-layout/iron-flex-layout.html",
+        "/bower_components/iron-icons/iron-icons.html",
+        "/bower_components/iron-pages/iron-pages.html",
+        "/bower_components/iron-selector/iron-selector.html",
+        "/bower_components/paper-drawer-panel/paper-drawer-panel.html",
+        "/bower_components/paper-button/paper-button.html",
+        "/bower_components/paper-icon-button/paper-icon-button.html",
+        "/bower_components/paper-item/paper-item.html",
+        "/bower_components/paper-material/paper-material.html",
+        "/bower_components/paper-menu/paper-menu.html",
+        "/bower_components/paper-header-panel/paper-header-panel.html",
+        "/bower_components/paper-scroll-header-panel/paper-scroll-header-panel.html",
+        "/bower_components/paper-styles/typography.html",
+        "/bower_components/paper-tabs/paper-tabs.html",
+        "/bower_components/paper-toast/paper-toast.html",
+        "/bower_components/paper-toolbar/paper-toolbar.html",
+        "/bower_components/app-layout/app-layout.html",
+        "/bower_components/app-layout/app-scroll-effects/effects/waterfall.html"
+    ]
+}
