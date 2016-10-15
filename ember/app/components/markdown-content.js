@@ -41,8 +41,6 @@ export default Ember.Component.extend({
 
 	highlightCode( code, lang, callback ) {
 
-		// callback( null, Prism.highlight( code, Prism.languages[ lang ] ) );
-
 		window.hljs.configure({
 			tabReplace: '    ', // 4 spaces
 			languages:  [
@@ -76,7 +74,7 @@ export default Ember.Component.extend({
 			window.marked( source, ( error, content ) => {
 
 				if ( error ) {
-					console.log( `Marked Error: ${error}` );
+					return source;
 				}
 
 				return content;

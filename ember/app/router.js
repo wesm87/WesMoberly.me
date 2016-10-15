@@ -1,15 +1,13 @@
-import Ember from 'ember';
+import Ember  from 'ember';
 import config from './config/environment';
 
 const Router = Ember.Router.extend({
 	location: config.locationType,
 });
 
-Router.map( () => {
+Router.map(function appRouter() {
 
-	this.route( 'about', () => {
-		this.route( 'test', { path: '/:page_slug/:page_id' });
-	});
+	this.route( 'about' );
 
 	this.route( 'portfolio', () => {
 		this.route( 'new' );

@@ -4,7 +4,8 @@
 		<h2 class="page__heading">{{model.title}}</h2>
 
 		<div class="portfolio-item">
-			<img class="portfolio-item__image" src="{{model.image}}" alt="CATS!">
+			{{!-- TODO: add alt text field to portfolio model --}}
+			<img class="portfolio-item__image" src="{{model.image}}" alt="Alt text goes here">
 
 			{{markdown-content content=model.content}}
 

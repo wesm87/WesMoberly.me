@@ -1,12 +1,19 @@
+
+// Custom variables & mixins
 @import '_require/variables';
-// @import '_require/mixins';
+@import '_require/mixins';
+
+// Import Bootstrap
 @import 'bootstrap';
+
+// Base styles
 @import '_base/defaults';
 @import '_base/layout';
+
+// Components
 @import '_components/navbars';
 @import '_components/about';
 @import '_components/portfolio';
 @import '_components/forms';
 @import '_components/blog';
-@import '_components/syntax-highlighting';
 @import '_components/footer';
