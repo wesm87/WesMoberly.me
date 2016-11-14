@@ -1,0 +1,16 @@
+{
+  "extends": ["tslint:latest", "tslint-microsoft-contrib", "tslint-react"],
+  "rules": {
+    "no-for-in-array": false,
+    "restrict-plus-operands": false,
+    "no-default-export": false,
+    "export-name": false,
+    "no-empty-interfaces": false,
+    "no-require-imports": false,
+    "no-var-requires": false,
+    "no-consecutive-blank-lines": false,
+    "quotemark": [true, "single", "avoid-escape", "jsx-double"],
+    "interface-name": [true, "never-prefix"]
+  },
+  "rulesDirectory": []
+}

@@ -1,5 +1,6 @@
 
 import 'babel-polyfill';
+
 import path from 'path';
 import express from 'express';
 import cookieParser from 'cookie-parser';
@@ -9,11 +10,13 @@ import expressGraphQL from 'express-graphql';
 import jwt from 'jsonwebtoken';
 import ReactDOM from 'react-dom/server';
 import PrettyError from 'pretty-error';
-import passport from './core/passport';
-import schema from './data/schema';
-import Router from './routes';
+import passport from 'core/passport';
+import schema from 'data/schema';
+import Router from 'routes';
+import config from 'config';
+
+// eslint-disable-next-line import/no-unresolved, import/extensions
 import assets from './assets';
-import { port, auth, analytics } from './config';
 
 const server = global.server = express();
 
@@ -36,7 +39,7 @@ server.use(bodyParser.json());
 // Authentication
 // -----------------------------------------------------------------------------
 server.use(expressJwt({
-  secret: auth.jwt.secret,
+  secret: config.get('auth.jwt.secret'),
   credentialsRequired: false,
   /* jscs:disable requireCamelCaseOrUpperCaseIdentifiers */
   getToken: req => req.cookies.id_token,
@@ -45,16 +48,22 @@ server.use(expressJwt({
 server.use(passport.initialize());
 
 server.get('/login/facebook',
-  passport.authenticate('facebook', { scope: ['email', 'user_location'], session: false })
+  passport.authenticate('facebook', {
+    scope: ['email', 'user_location'],
+    session: false,
+  }),
 );
 server.get('/login/facebook/return',
-  passport.authenticate('facebook', { failureRedirect: '/login', session: false }),
+  passport.authenticate('facebook', {
+    failureRedirect: '/login',
+    session: false,
+  }),
   (req, res) => {
     const expiresIn = 60 * 60 * 24 * 180; // 180 days
-    const token = jwt.sign(req.user, auth.jwt.secret, { expiresIn });
+    const token = jwt.sign(req.user, config.get('auth.jwt.secret'), { expiresIn });
     res.cookie('id_token', token, { maxAge: 1000 * expiresIn, httpOnly: true });
     res.redirect('/');
-  }
+  },
 );
 
 //
@@ -70,22 +79,43 @@ server.use('/graphql', expressGraphQL(req => ({
 //
 // Register server-side rendering middleware
 // -----------------------------------------------------------------------------
+
+function renderView(viewName, data) {
+  // eslint-disable-next-line global-require, import/no-dynamic-require
+  const template = require(`./views/${viewName}.pug`);
+
+  return template(data);
+}
+
 server.get('*', async (req, res, next) => {
   try {
     let statusCode = 200;
-    const template = require('./views/index.pug');
-    const data = { title: '', description: '', css: '', body: '', entry: assets.main.js };
+    const data = {
+      title: '',
+      description: '',
+      css: '',
+      body: '',
+      entry: assets.main.js,
+    };
 
     if (process.env.NODE_ENV === 'production') {
-      data.trackingId = analytics.google.trackingId;
+      data.trackingId = config.get('analytics.google.trackingId');
     }
 
     const css = [];
     const context = {
-      insertCss: styles => css.push(styles._getCss()),
-      onSetTitle: value => (data.title = value),
-      onSetMeta: (key, value) => (data[key] = value),
-      onPageNotFound: () => (statusCode = 404),
+      insertCss(styles) {
+        css.push(styles._getCss());
+      },
+      onSetTitle(value) {
+        data.title = value;
+      },
+      onSetMeta(key, value) {
+        data[key] = value;
+      },
+      onPageNotFound() {
+        statusCode = 404;
+      },
     };
 
     await Router.dispatch({ path: req.path, query: req.query, context }, (state, component) => {
@@ -94,7 +124,7 @@ server.get('*', async (req, res, next) => {
     });
 
     res.status(statusCode);
-    res.send(template(data));
+    res.send(renderView('index', data));
   } catch (err) {
     next(err);
   }
@@ -109,19 +139,21 @@ pe.skipPackage('express');
 
 server.use((err, req, res, next) => { // eslint-disable-line no-unused-vars
   console.log(pe.render(err)); // eslint-disable-line no-console
-  const template = require('./views/error.pug');
   const statusCode = err.status || 500;
-  res.status(statusCode);
-  res.send(template({
+  const data = {
     message: err.message,
     stack: process.env.NODE_ENV === 'production' ? '' : err.stack,
-  }));
+  };
+  res.status(statusCode);
+  res.send(renderView('error', data));
 });
 
 //
 // Launch the server
 // -----------------------------------------------------------------------------
-server.listen(port, () => {
+const serverPort = config.get('server.port');
+const serverURL = config.get('server.url');
+server.listen(serverPort, () => {
   /* eslint-disable no-console */
-  console.log(`The server is running at http://localhost:${port}/`);
+  console.log(`The server is running at ${serverURL}`);
 });

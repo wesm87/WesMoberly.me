@@ -6,15 +6,15 @@
 
 import passport from 'passport';
 import { Strategy as FacebookStrategy } from 'passport-facebook';
-import db from './db';
-import { auth as config } from '../config';
+import db from 'core/db';
+import config from 'config';
 
 /**
  * Sign in with Facebook.
  */
 passport.use(new FacebookStrategy({
-  clientID: config.facebook.id,
-  clientSecret: config.facebook.secret,
+  clientID: config.get('auth.facebook.id'),
+  clientSecret: config.get('auth.facebook.secret'),
   callbackURL: '/login/facebook/return',
   profileFields: ['name', 'email', 'link', 'locale', 'timezone'],
   passReqToCallback: true,
@@ -24,7 +24,7 @@ passport.use(new FacebookStrategy({
     if (req.user) {
       let result = await query(
         'SELECT 1 FROM user_login WHERE name = $1 AND key = $2',
-        loginName, profile.id
+        loginName, profile.id,
       );
       if (result.rowCount) {
         // There is already a Facebook account that belongs to you.
@@ -75,7 +75,7 @@ passport.use(new FacebookStrategy({
         } else {
           result = await query(`
             INSERT INTO user_account (email) VALUES ($1) RETURNING (id)`,
-            profile._json.email
+            profile._json.email,
           );
           const userId = result.rows[0].id;
           await query(`
@@ -89,7 +89,7 @@ passport.use(new FacebookStrategy({
             INSERT INTO user_profile (user_id, display_name, gender, picture)
             VALUES ($1, $2, $3, $4);`,
             userId, profile.displayName, profile._json.gender,
-            `https://graph.facebook.com/${profile.id}/picture?type=large`
+            `https://graph.facebook.com/${profile.id}/picture?type=large`,
           );
           result = await query('SELECT id, email FROM user_account WHERE id = $1;', userId);
           done(null, result.rows[0]);

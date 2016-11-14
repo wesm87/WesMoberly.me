@@ -1,5 +1,5 @@
 
-import UserType from '../types/UserType';
+import UserType from 'data/types/UserType';
 
 const me = {
   type: UserType,

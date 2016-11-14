@@ -2,16 +2,20 @@
 import 'babel-polyfill';
 import ReactDOM from 'react-dom';
 import FastClick from 'fastclick';
-import Router from './routes';
-import Location from './core/Location';
-import { addEventListener, removeEventListener } from './core/DOMUtils';
+import Router from 'routes';
+import Location from 'core/Location';
+import { addEventListener, removeEventListener } from 'core/DOMUtils';
 
 let cssContainer = document.getElementById('css');
 const appContainer = document.getElementById('app');
 const context = {
-  insertCss: styles => styles._insertCss(),
-  onSetTitle: value => (document.title = value),
-  onSetMeta: (name, content) => {
+  insertCss(styles) {
+    styles._insertCss();
+  },
+  onSetTitle(value) {
+    document.title = value;
+  },
+  onSetMeta(name, content) {
     // Remove and create a new <meta /> tag in order to make it work
     // with bookmarks in Safari
     const elements = document.getElementsByTagName('meta');
@@ -63,7 +67,7 @@ function run() {
   FastClick.attach(document.body);
 
   // Re-render the app when window.location changes
-  const unlisten = Location.listen(location => {
+  const unlisten = Location.listen((location) => {
     currentLocation = location;
     currentState = Object.assign({}, location.state, {
       path: location.pathname,

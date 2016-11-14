@@ -1,6 +1,6 @@
 
 import React from 'react';
-import withStyles from 'isomorphic-style-loader/lib/withStyles';
+import addStyles from 'react-css-modules';
 import Link from 'components/Link';
 import s from './style.scss';
 
@@ -20,4 +20,4 @@ function Footer() {
   );
 }
 
-export default withStyles(Footer, s);
+export default addStyles(Footer, s);

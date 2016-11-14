@@ -11,7 +11,7 @@ import {
   GraphQLNonNull as NonNull,
 } from 'graphql';
 
-import ContentType from '../types/ContentType';
+import ContentType from 'data/types/ContentType';
 
 const md = new MarkdownIt();
 
@@ -40,7 +40,7 @@ const parseContent = (path, fileContent, extension) => {
 };
 
 const readFile = Promise.promisify(fs.readFile);
-const fileExists = filename => new Promise(resolve => {
+const fileExists = filename => new Promise((resolve) => {
   fs.exists(filename, resolve);
 });
 

@@ -1,12 +1,13 @@
 
-import React, { Component, PropTypes } from 'react';
+import React, { PureComponent, PropTypes } from 'react';
 import emptyFunction from 'fbjs/lib/emptyFunction';
-import s from './style.scss';
-import Header from '../Header';
-import Feedback from '../Feedback';
-import Footer from '../Footer';
+import AppHeader from 'components/AppHeader';
+import AppMain from 'components/AppMain';
+import AppFooter from 'components/AppFooter';
 
-class App extends Component {
+import s from './style.scss';
+
+class App extends PureComponent {
 
   static propTypes = {
     context: PropTypes.shape({
@@ -45,15 +46,26 @@ class App extends Component {
     this.removeCss();
   }
 
-  render() {
-    return !this.props.error ? (
-      <div>
-        <Header />
-        {this.props.children}
-        <Feedback />
-        <Footer />
+  renderApp = () => {
+    const { children, error } = this.props;
+
+    if (error) {
+      return children;
+    }
+
+    return (
+      <div className="c-app">
+        <AppHeader />
+        <AppMain>
+          {children}
+        </AppMain>
+        <AppFooter />
       </div>
-    ) : this.props.children;
+    );
+  }
+
+  render() {
+    return this.renderApp();
   }
 
 }

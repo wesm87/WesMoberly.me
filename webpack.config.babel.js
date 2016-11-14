@@ -66,15 +66,17 @@ const config = {
   module: {
     loaders: [
       {
-        test: /\.jsx?$/,
+        test: /\.js(x?)$/,
         include: PATHS.source,
         loaders: [
           'babel-loader',
         ],
       },
       {
-        test: /\.tsx?$/,
+        test: /\.ts(x?)$/,
+        include: PATHS.source,
         loaders: [
+          'babel-loader',
           'ts-loader',
         ],
       },
@@ -206,6 +208,7 @@ const clientConfig = merge({}, config, {
   entry: {
     client: './client.js',
     vendor: [
+      'babel-polyfill',
       'lodash',
       'react',
       'react-dom',

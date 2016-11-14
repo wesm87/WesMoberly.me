@@ -25,11 +25,20 @@ module.exports = {
     'no-plusplus': ['error', {
       allowForLoopAfterthoughts: true,
     }],
+    'no-restricted-syntax': [
+      'error',
+      'ForInStatement',
+      'LabeledStatement',
+      'WithStatement',
+    ],
     'import/no-extraneous-dependencies': ['error', {
       'devDependencies': true,
     }],
     'react/prefer-stateless-function': ['error', {
       ignorePureComponents: true,
+    }],
+    'react/jsx-filename-extension': ['error', {
+      extensions: ['.jsx', '.tsx'],
     }],
   }
 };

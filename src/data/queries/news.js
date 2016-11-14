@@ -1,11 +1,11 @@
 
 import { GraphQLList as List } from 'graphql';
-import fetch from '../../core/fetch';
-import NewsItemType from '../types/NewsItemType';
+import fetch from 'core/fetch';
+import NewsItemType from 'data/types/NewsItemType';
 
 // React.js News Feed (RSS)
-const url = 'http://ajax.googleapis.com/ajax/services/feed/load' +
-            '?v=1.0&num=10&q=https://reactjsnews.com/feed.xml';
+const urlBase = 'http://ajax.googleapis.com/ajax/services/feed/load?v=1.0';
+const url = `${urlBase}&num=10&q=https://reactjsnews.com/feed.xml`;
 
 let items = [];
 let lastFetchTask;
@@ -22,7 +22,7 @@ const news = {
       lastFetchTime = new Date();
       lastFetchTask = fetch(url)
         .then(response => response.json())
-        .then(data => {
+        .then((data) => {
           if (data.responseStatus === 200) {
             items = data.responseData.feed.entries;
           }

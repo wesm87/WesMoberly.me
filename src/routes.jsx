@@ -7,11 +7,11 @@ import {
   browserHistory,
 } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
-import fetch from './core/fetch';
-import App from './components/App';
-import ContentPage from './components/ContentPage';
-import NotFoundPage from './components/NotFoundPage';
-import ErrorPage from './components/ErrorPage';
+import fetch from 'core/fetch';
+import App from 'components/App';
+import ContentPage from 'components/ContentPage';
+import NotFoundPage from 'components/NotFoundPage';
+import ErrorPage from 'components/ErrorPage';
 
 const routes = [
   require('./routes/home'),

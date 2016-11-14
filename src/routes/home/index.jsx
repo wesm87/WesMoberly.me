@@ -1,7 +1,7 @@
 
 import React from 'react';
+import fetch from 'core/fetch';
 import Home from './Home';
-import fetch from '../../core/fetch';
 
 export const path = '/';
 export const action = async (state) => {

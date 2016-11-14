@@ -1,6 +1,9 @@
 
-import React, { Component, PropTypes } from 'react';
-import Location from '../../core/Location';
+import React, { PureComponent, PropTypes } from 'react';
+import { Link as RouterLink } from 'react-router';
+import cx from 'classnames';
+import url from 'url';
+import Location from 'core/Location';
 
 function isLeftClickEvent(event) {
   return event.button === 0;
@@ -10,12 +13,33 @@ function isModifiedEvent(event) {
   return !!(event.metaKey || event.altKey || event.ctrlKey || event.shiftKey);
 }
 
-class Link extends Component { // eslint-disable-line react/prefer-stateless-function
+class Link extends PureComponent {
 
   static propTypes = {
-    to: PropTypes.oneOfType([PropTypes.string, PropTypes.object]).isRequired,
+    to: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.object,
+      PropTypes.func,
+    ]).isRequired,
+    className: PropTypes.string,
+    children: PropTypes.node,
     onClick: PropTypes.func,
   };
+
+  getClassNames = () => {
+    const { className } = this.props;
+
+    return cx('o-link', {
+      className,
+    });
+  }
+
+  isExternal = () => {
+    const { to } = this.props;
+    const protocol = url.parse(to).protocol;
+
+    return (protocol === 'http:' || protocol === 'https:');
+  }
 
   handleClick = (event) => {
     let allowTransition = true;
@@ -47,10 +71,19 @@ class Link extends Component { // eslint-disable-line react/prefer-stateless-fun
   };
 
   render() {
-    const { to, ...props } = this.props; // eslint-disable-line no-use-before-define
-    return <a href={Location.createHref(to)} {...props} onClick={this.handleClick} />;
-  }
+    const { to, children, ...props } = this.props;
+    const LinkComponent = this.isExternal() ? 'a' : RouterLink;
 
+    return (
+      <LinkComponent
+        {...props}
+        href={Location.createHref(to)}
+        onClick={this.handleClick}
+      >
+        {children}
+      </LinkComponent>
+    );
+  }
 }
 
 export default Link;

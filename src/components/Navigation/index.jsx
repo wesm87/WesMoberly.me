@@ -2,8 +2,8 @@
 import React, { PropTypes } from 'react';
 import cx from 'classnames';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
+import Link from 'components/Link';
 import s from './style.scss';
-import Link from '../Link';
 
 function Navigation({ className }) {
   return (

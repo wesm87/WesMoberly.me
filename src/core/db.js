@@ -1,7 +1,7 @@
 
 import db from 'pg';
 import Promise from 'bluebird';
-import { databaseUrl } from '../config';
+import config from 'config';
 
 // TODO: Customize database connection settings
 /* jscs:disable requireCamelCaseOrUpperCaseIdentifiers */
@@ -51,7 +51,7 @@ AsyncClient.prototype.end = function end() {
  * https://github.com/brianc/node-postgres/wiki/pg
  */
 db.connect = (connect => callback => new Promise((resolve, reject) => {
-  connect.call(db, databaseUrl, (err, client, done) => {
+  connect.call(db, config.get('db.url'), (err, client, done) => {
     if (err) {
       if (client) {
         done(client);
