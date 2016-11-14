@@ -11,10 +11,10 @@ declare var require: {
 };
 
 interface ComponentContext {
-  insertCss?: () => void;
-  onSetTitle?: (title: string) => void;
-  onSetMeta?: (key: string, value: string) => void;
-  onPageNotFound?: () => void;
+  insertCss?(): void;
+  onSetTitle?(title: string): void;
+  onSetMeta?(key: string, value: string): void;
+  onPageNotFound?(): void;
 }
 
 interface Array<T> {

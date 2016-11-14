@@ -2,7 +2,7 @@
  * DOM-related utility functions.
  */
 
-export function addEventListener(node, event: string, listener: () => void): void {
+export function addEventListener(node, event: string, listener: Function): void {
   if (node.addEventListener) {
     node.addEventListener(event, listener, false);
   } else {
@@ -10,7 +10,7 @@ export function addEventListener(node, event: string, listener: () => void): voi
   }
 }
 
-export function removeEventListener(node, event: string, listener: () => void): void {
+export function removeEventListener(node, event: string, listener: Function): void {
   if (node.removeEventListener) {
     node.removeEventListener(event, listener, false);
   } else {

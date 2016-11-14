@@ -30,20 +30,14 @@ class Link extends PureComponent<Props, State> {
 
     if (this.isExternal()) {
       return (
-        <RouterLink
-          {...this.props}
-          {...this.getCustomProps()}
-        >
+        <RouterLink {...this.props} {...this.getCustomProps()}>
           {children}
         </RouterLink>
       );
     }
 
     return (
-      <a
-        {...this.props}
-        {...this.getCustomProps()}
-      >
+      <a {...this.props} {...this.getCustomProps()}>
         {children}
       </a>
     );

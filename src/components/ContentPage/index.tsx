@@ -9,13 +9,6 @@ import * as withStyles from 'react-css-modules';
 const { PureComponent } = React;
 
 
-interface ComponentContext {
-  onSetTitle: (title: string) => void;
-  insertCss?: (styles: any) => void;
-  onSetMeta?: (key: string, value: string) => void;
-  onPageNotFound?: () => void;
-}
-
 interface Props {
   context: ComponentContext;
   path: string;

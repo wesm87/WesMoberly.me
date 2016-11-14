@@ -17,9 +17,6 @@ module.exports = {
     'react',
     'import',
   ],
-  settings: {
-    'import/resolver': 'webpack',
-  },
   rules: {
     'no-underscore-dangle': 'off',
     'no-plusplus': ['error', {

@@ -2,8 +2,10 @@
  * History / location utils.
  */
 
-import { createHistory, createMemoryHistory } from 'history';
+import * as history from 'history';
 
-const history = process.env.BROWSER ? createHistory() : createMemoryHistory();
+const { createHistory, createMemoryHistory } = history;
 
-export default history.location;
+const baseHistory = process.env.BROWSER ? createHistory() : createMemoryHistory();
+
+export default baseHistory;
