@@ -7,6 +7,7 @@ function run(fn, options) {
   const task = fn.default || fn;
   const start = new Date();
   console.log(`[${format(start)}] Starting '${task.name}'...`);
+
   return task(options).then(() => {
     const end = new Date();
     const time = end.getTime() - start.getTime();
@@ -16,8 +17,11 @@ function run(fn, options) {
 
 if (process.mainModule.children.length === 0 && process.argv.length > 2) {
   delete require.cache[__filename];
+
+  // eslint-disable-next-line global-require, import/no-dynamic-require
   const module = require(`./${process.argv[2]}.js`).default;
-  run(module).catch((err) => console.error(err.stack));
+
+  run(module).catch(err => console.error(err.stack));
 }
 
 export default run;

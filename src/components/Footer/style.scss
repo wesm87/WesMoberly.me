@@ -1,28 +1,27 @@
-@import '../variables.scss';
+@import '../variables';
 
 .root {
-  background: #333;
   color: #fff;
+  background: #333;
 }
 
 .container {
-  margin: 0 auto;
-  padding: 20px 15px;
   max-width: $max-content-width;
+  padding: 20px 15px;
+  margin: 0 auto;
   text-align: center;
 }
 
 .text {
-  color: rgba(255, 255, 255, .5);
+  color: rgba(255, 255, 255, 0.5);
 }
 
 .textMuted {
-  composes: text;
-  color: rgba(255, 255, 255, .3);
+  color: rgba(255, 255, 255, 0.3);
 }
 
 .spacer {
-  color: rgba(255, 255, 255, .3);
+  color: rgba(255, 255, 255, 0.3);
 }
 
 .text,
@@ -34,7 +33,7 @@
 .link,
 .link:active,
 .link:visited {
-  color: rgba(255, 255, 255, .6);
+  color: rgba(255, 255, 255, 0.6);
   text-decoration: none;
 }
 

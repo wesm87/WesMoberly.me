@@ -1,16 +1,19 @@
-jest.unmock('../App');
+/* eslint-disable import/first */
 
-import App from '../App';
+jest.unmock('components/App');
+
+import App from 'components/App';
 import React from 'react';
 import { shallow } from 'enzyme';
 
 describe('App', () => {
   it('renders children correctly', () => {
-    const wrapper = shallow(
+    const app = (
       <App context={{ insertCss: () => {} }}>
         <div className="child" />
       </App>
     );
+    const wrapper = shallow(app);
     expect(wrapper.contains(<div className="child" />)).toBe(true);
   });
 });

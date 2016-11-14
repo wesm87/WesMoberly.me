@@ -62,7 +62,7 @@ db.connect = (connect => callback => new Promise((resolve, reject) => {
       callback(new AsyncClient(client)).then(() => {
         done();
         resolve();
-      }).catch(error => {
+      }).catch((error) => {
         done(client);
         reject(error);
       });

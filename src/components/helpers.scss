@@ -1,0 +1,83 @@
+////
+/// @group Tools
+////
+
+/// Takes a color and returns the overall brightness as a percentage.
+///
+/// @source https://github.com/Compass/compass/blob/stable/core/stylesheets/compass/utilities/color/_brightness.scss
+///
+/// @param {Color} $color - The color to calculate the brightness of.
+///
+/// @return {Number} The brightness as a percentage.
+@function brightness($color) {
+  @if type-of($color) != color {
+    @error '`$color` must be a color (#{$color} was passed).';
+  }
+
+  $r: red($color) * 0.299;
+  $g: green($color) * 0.587;
+  $b: blue($color) * 0.114;
+
+  $base: $r + $g + $b;
+
+  @return $base / 255 * 100%;
+}
+
+/// Takes a color, determines whether it's dark or light, and returns a color
+/// that contrasts it. For example, if the color is dark, a light color is
+/// returned, and vice-versa. Useful for when you need to ensure an element's
+/// text is readable against its background color.
+///
+/// @source https://github.com/Compass/compass/blob/stable/core/stylesheets/compass/utilities/color/_contrast.scss
+///
+/// @param {Color} $color                - The base color to contrast against.
+/// @param {Color} $dark  [$color-dark]  - The dark color to use.
+/// @param {Color} $light [$color-light] - The light color to use.
+///
+/// @return {Color}
+@function contrast-color(
+  $color,
+  $dark: config-get('colors', 'dark'),
+  $light: config-get('colors', 'light')
+) {
+  $diff-light: abs(brightness($color) - brightness($light));
+  $diff-dark: abs(brightness($color) - brightness($dark));
+
+  @return if($diff-light >= $diff-dark, $light, $dark);
+}
+
+
+/// Lighten a color.
+///
+/// @access public
+///
+/// @param {Color}  $color            - The color to tint.
+/// @param {Number} $percentage [50%] - The amount of tint to apply.
+///
+/// @return {Color}
+@function tint($color, $percentage: 50%) {
+  @return mix(#fff, $color, $percentage);
+}
+
+/// Darken a color.
+///
+/// @param {Color} $color             - The color to shade.
+/// @param {Number} $percentage [50%] - The amount of shade to apply.
+///
+/// @return {Color}
+@function shade($color, $percentage: 50%) {
+  @return mix(#000, $color, $percentage);
+}
+
+/// Automatically tint or shade a color depending on the color's brightness.
+///
+/// @access public
+///
+/// @param {Color} $color             - The color to tint or shade.
+/// @param {Number} $percentage [50%] - The amount of tint or shade to apply.
+@function tint-or-shade($color, $percentage: 50%) {
+  $dark: shade($color, $percentage);
+  $light: tint($color, $percentage);
+
+  @return contrast-color($color, $dark, $light);
+}

@@ -1,6 +1,12 @@
 
 import React from 'react';
-import Router from 'react-routing/src/Router';
+import {
+  Router,
+  Route,
+  IndexRoute,
+  browserHistory,
+} from 'react-router';
+import { syncHistoryWithStore } from 'react-router-redux';
 import fetch from './core/fetch';
 import App from './components/App';
 import ContentPage from './components/ContentPage';

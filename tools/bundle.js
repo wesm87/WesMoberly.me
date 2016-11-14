@@ -1,6 +1,6 @@
 
 import webpack from 'webpack';
-import webpackConfig from './webpack.config';
+import webpackConfig from '../webpack.config.babel';
 
 /**
  * Creates application bundles from the source files.

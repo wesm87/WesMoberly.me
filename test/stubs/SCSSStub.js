@@ -1,5 +1,5 @@
+
 /**
  * @providesModule SCSSStub
  */
-
 module.exports = {};

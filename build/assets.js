@@ -1,1 +1,1 @@
-module.exports = {"main":{"js":"/main.js?3bc602232036fbeb536c"}};
+module.exports = {"client":{"js":"/client.js?7a6b3ea81af0d7bc3c23"},"vendor":{"js":"/vendor.js"}};

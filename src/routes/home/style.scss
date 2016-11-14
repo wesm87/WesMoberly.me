@@ -1,5 +1,5 @@
 
-@import '../../components/variables.scss';
+@import '../../components/variables';
 
 .root {
   padding-left: 20px;
@@ -7,9 +7,9 @@
 }
 
 .container {
-  margin: 0 auto;
-  padding: 0 0 40px;
   max-width: $max-content-width;
+  padding: 0 0 40px;
+  margin: 0 auto;
 }
 
 .news {
@@ -25,6 +25,7 @@
   font-size: 1.125em;
 }
 
-.newsTitle, .newsDesc {
+.newsTitle,
+.newsDesc {
   display: block;
 }

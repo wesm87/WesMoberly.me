@@ -1,11 +1,11 @@
-@import '../variables.scss';
+@import '../variables';
 
 .root {
-
+  // TODO: Add styles here
 }
 
 .container {
-  margin: 0 auto;
-  padding: 0 0 40px;
   max-width: $max-content-width;
+  padding: 0 0 40px;
+  margin: 0 auto;
 }
