@@ -1,6 +1,7 @@
 
 import GitRepo from 'git-repository';
 import run from './run';
+import build from './build';
 import fetch from './lib/fetch';
 
 // TODO: Update deployment URL
@@ -34,7 +35,7 @@ async function deploy() {
   // Build the project in RELEASE mode which
   // generates optimized and minimized bundles
   process.argv.push('--release');
-  await run(require('./build'));
+  await run(build);
 
   // Push the contents of the build folder to the remote server via Git
   await repo.add('--all .');
