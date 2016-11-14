@@ -5,8 +5,8 @@ import s from './style.scss';
 
 function Register({ title }) {
   return (
-    <div className={s.root}>
-      <div className={s.container}>
+    <div styleName="root">
+      <div styleName="container">
         <h1>{title}</h1>
         <p>...</p>
       </div>

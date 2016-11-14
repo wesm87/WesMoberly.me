@@ -4,14 +4,12 @@
  */
 
 import * as React from 'react';
-import * as addStyles from 'react-css-modules';
+import * as withStyles from 'react-css-modules';
 
 const { PureComponent } = React;
 
 
-interface Props {
-  children: React.ReactNode;
-}
+interface Props {}
 
 interface State {}
 
@@ -29,4 +27,4 @@ class AppMain extends PureComponent<Props, State> {
 }
 
 
-export default addStyles(AppMain, require('./style.scss'));
+export default withStyles(AppMain, require('./style.scss'));

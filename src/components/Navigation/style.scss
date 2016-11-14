@@ -1,17 +1,19 @@
 
-.root {}
+.root {
+  // TODO: Add styles
+}
 
 .link {
   display: inline-block;
   padding: 3px 8px;
+  font-size: 18px;
   text-decoration: none;
-  font-size: 1.125em; /* ~18px */
 }
 
 .link,
 .link:active,
 .link:visited {
-  color: rgba(255, 255, 255, .6);
+  color: rgba(255, 255, 255, 0.6);
 }
 
 .link:hover {
@@ -19,17 +21,17 @@
 }
 
 .highlight {
-  margin-right: 8px;
   margin-left: 8px;
+  margin-right: 8px;
   border-radius: 3px;
-  background: rgba(0, 0, 0, .15);
   color: #fff;
+  background: rgba(0, 0, 0, 0.15);
 }
 
 .highlight:hover {
-  background: rgba(0, 0, 0, .3);
+  background: rgba(0, 0, 0, 0.3);
 }
 
 .spacer {
-  color: rgba(255, 255, 255, .3);
+  color: rgba(255, 255, 255, 0.3);
 }

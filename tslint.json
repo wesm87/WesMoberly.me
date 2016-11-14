@@ -3,14 +3,20 @@
   "rules": {
     "no-for-in-array": false,
     "restrict-plus-operands": false,
-    "no-default-export": false,
-    "export-name": false,
-    "no-empty-interfaces": false,
-    "no-require-imports": false,
+    "ordered-imports": false,
     "no-var-requires": false,
+    "no-require-imports": false,
+    "no-relative-imports": false,
+    "no-default-export": false,
+    "import-name": false,
+    "export-name": false,
     "no-consecutive-blank-lines": false,
-    "quotemark": [true, "single", "avoid-escape", "jsx-double"],
-    "interface-name": [true, "never-prefix"]
+    "object-literal-sort-keys": false,
+    "no-empty-interfaces": false,
+    "no-http-string": false,
+    "no-backbone-get-set-outside-model": false,
+    "interface-name": [true, "never-prefix"],
+    "quotemark": [true, "single", "avoid-escape", "jsx-double"]
   },
   "rulesDirectory": []
 }
