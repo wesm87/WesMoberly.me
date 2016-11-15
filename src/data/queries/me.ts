@@ -1,13 +1,28 @@
+/**
+ * The current logged-in user.
+ */
 
 import UserType from 'data/types/UserType';
+
+
+interface User {
+  id: string;
+  email: string;
+}
+
 
 const me = {
   type: UserType,
   resolve({ request }) {
-    return request.user && {
-      id: request.user.id,
-      email: request.user.email,
-    };
+    const { user } = request;
+
+    if (!user) {
+      return null;
+    }
+
+    const { id, email } = user;
+
+    return <User> { id, email };
   },
 };
 
