@@ -2,8 +2,9 @@
  * Server-side entry point.
  */
 
+// tslint:disable:no-console
+
 import 'babel-polyfill';
-import 'node';
 
 import * as path from 'path';
 import * as express from 'express';
@@ -21,7 +22,7 @@ import Router from 'routes';
 import config from 'config';
 
 
-interface AssetsJS {
+export interface AssetsJS {
   client: {
     js: string;
   };
@@ -32,14 +33,15 @@ interface AssetsJS {
 
 const assets = <AssetsJS> require('./assets');
 
-const server = global.server = express();
+export const server = <express.Express> express();
 
 //
 // Tell any CSS tooling (such as Material UI) to use all vendor prefixes if the
 // user agent is not known.
 // -----------------------------------------------------------------------------
-global.navigator = global.navigator || {};
-global.navigator.userAgent = global.navigator.userAgent || 'all';
+export const navigator = {
+  userAgent: 'all',
+};
 
 //
 // Register Node.js middleware

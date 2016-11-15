@@ -1,13 +1,14 @@
 /**
- * withViewport HOC
+ * withViewport Higher-Order Component
  */
 
 import * as React from 'react';
 import * as EventEmitter from '@types/eventemitter3';
 
-import { canUseDOM } from 'core/DOMUtils';
+import { canUseDOM } from 'core/utils/DOM';
 
 const { Component } = React;
+
 
 interface Viewport {
   width: number;
@@ -68,11 +69,11 @@ function withViewport(ComposedComponent) {
       }
     }
 
-    protected handleResize(value) {
+    protected handleResize = (value) => {
       this.setState({ viewport: value });
     }
-
   };
 }
+
 
 export default withViewport;

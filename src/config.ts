@@ -36,12 +36,6 @@ const configs = {
       displayFormat: 'M-D-YY',
     },
 
-    analytics: {
-      google: {
-        trackingId: process.env.GOOGLE_TRACKING_ID || 'UA-XXXXX-X',
-      },
-    },
-
     auth: {
       jwt: {
         secret: process.env.JWT_SECRET || 'React Starter Kit',

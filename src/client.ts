@@ -11,6 +11,7 @@ import Router from 'routes';
 import Location from 'core/Location';
 import { addEventListener, removeEventListener } from 'core/utils/DOM';
 
+
 let cssContainer = document.getElementById('css');
 const appContainer = document.getElementById('app');
 const context = {
@@ -38,10 +39,6 @@ const context = {
   },
 };
 
-// Google Analytics tracking. Don't send 'pageview' event after the first
-// rendering, as it was already sent by the Html component.
-let trackPageview = () => (trackPageview = () => window.ga('send', 'pageview'));
-
 function render(state) {
   Router.dispatch(state, (newState, component) => {
     ReactDOM.render(component, appContainer, () => {
@@ -51,8 +48,6 @@ function render(state) {
       } else {
         window.scrollTo(0, 0);
       }
-
-      trackPageview();
 
       // Remove the pre-rendered CSS because it's no longer used
       // after the React app is launched

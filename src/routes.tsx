@@ -1,17 +1,24 @@
+/**
+ * Routes.
+ */
 
-import React from 'react';
-import {
-  Router,
-  Route,
-  IndexRoute,
-  browserHistory,
-} from 'react-router';
-import { syncHistoryWithStore } from 'react-router-redux';
+import * as React from 'react';
+import * as reactRouter from 'react-router';
+import * as reactRouterRedux from 'react-router-redux';
 import fetch from 'core/fetch';
 import App from 'components/App';
 import ContentPage from 'components/ContentPage';
 import NotFoundPage from 'components/NotFoundPage';
 import ErrorPage from 'components/ErrorPage';
+
+const {
+  Router,
+  Route,
+  IndexRoute,
+  browserHistory,
+} = reactRouter;
+
+const { syncHistoryWithStore } = reactRouterRedux;
 
 const routes = [
   require('./routes/home'),
