@@ -4,6 +4,7 @@ import path from 'path';
 import webpack from 'webpack';
 import AssetsPlugin from 'assets-webpack-plugin';
 import VendorChunkPlugin from 'webpack-vendor-chunk-plugin';
+import EnvironmentPlugin from 'inline-environment-variables-webpack-plugin';
 import eyeglass from 'eyeglass';
 import autoprefixer from 'autoprefixer';
 import postcssInitial from 'postcss-initial';
@@ -27,6 +28,10 @@ const PATHS = {
   source: path.resolve(__dirname, 'src'),
   build: path.resolve(__dirname, 'build'),
 };
+
+const ENV_WHITELIST = [
+  'NODE_ENV',
+];
 
 //
 // Common configuration chunk to be used for both
@@ -134,9 +139,7 @@ const config = {
   },
 
   plugins: [
-    new webpack.EnvironmentPlugin([
-      'NODE_ENV',
-    ]),
+    new EnvironmentPlugin(ENV_WHITELIST, { warnings: false }),
     new webpack.NamedModulesPlugin(),
     new webpack.LoaderOptionsPlugin({
       options: {

@@ -1,4 +1,6 @@
 
+const path = require('path');
+
 module.exports = {
   root: true,
   parser: 'babel-eslint',
@@ -17,6 +19,21 @@ module.exports = {
     'react',
     'import',
   ],
+  settings: {
+    'import/resolver': {
+      webpack: {
+        config: {
+          resolve: {
+            extensions: ['*', '.scss', '.ts', '.tsx', '.js', '.jsx', '.json'],
+            modules: [
+              path.resolve(__dirname, 'src'),
+              'node_modules',
+            ],
+          },
+        },
+      },
+    },
+  },
   rules: {
     'no-underscore-dangle': 'off',
     'no-plusplus': ['error', {
