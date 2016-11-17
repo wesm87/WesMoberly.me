@@ -2,9 +2,9 @@
  * Render app.
  */
 
-import * as _ from 'lodash';
 import * as React from 'react';
 import * as withStyles from 'react-css-modules';
+import { noop } from 'lodash';
 
 import AppHeader from 'components/AppHeader';
 import AppMain from 'components/AppMain';
@@ -23,7 +23,8 @@ interface Props {
 interface State {}
 
 
-class App extends PureComponent<Props, State> {
+@withStyles(require('./styles.scss'))
+export default class App extends PureComponent<Props, State> {
   public render() {
     const { children, error } = this.props;
 
@@ -45,10 +46,10 @@ class App extends PureComponent<Props, State> {
   protected getChildContext() {
     const {
       context: {
-        insertCss = _.noop,
-        onSetTitle = _.noop,
-        onSetMeta = _.noop,
-        onPageNotFound = _.noop,
+        insertCss = noop,
+        onSetTitle = noop,
+        onSetMeta = noop,
+        onPageNotFound = noop,
       },
     } = this.props;
 
@@ -60,5 +61,3 @@ class App extends PureComponent<Props, State> {
     };
   }
 }
-
-export default withStyles(App, require('./styles.scss'));

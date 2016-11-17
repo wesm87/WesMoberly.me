@@ -16,7 +16,8 @@ interface Props {}
 interface State {}
 
 
-class Header extends PureComponent<Props, State> {
+@withStyles(require('./style.scss'))
+export default class Header extends PureComponent<Props, State> {
   public render() {
     return (
       <div styleName="root">
@@ -35,6 +36,3 @@ class Header extends PureComponent<Props, State> {
     );
   }
 }
-
-
-export default withStyles(Header, require('./style.scss'));

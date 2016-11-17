@@ -1,5 +1,5 @@
 /**
- * Renders the Home page.
+ * Home page.
  */
 
 import * as React from 'react';
@@ -21,7 +21,8 @@ interface Props {
 interface State {}
 
 
-class Home extends PureComponent<Props, State> {
+@withStyles(require('./style.scss'))
+export default class Home extends PureComponent<Props, State> {
 
   public render() {
     const { news } = this.props;
@@ -50,6 +51,3 @@ class Home extends PureComponent<Props, State> {
     );
   }
 }
-
-
-export default withStyles(Home, require('./styles.scss'));

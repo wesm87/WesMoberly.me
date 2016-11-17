@@ -1,5 +1,5 @@
 /**
- * Contact page.
+ * Register page.
  */
 
 import * as React from 'react';
@@ -16,7 +16,7 @@ interface State {}
 
 
 @withStyles(require('./style.scss'))
-export default class Contact extends PureComponent<Props, State> {
+export default class Register extends PureComponent<Props, State> {
 
   public render() {
     const { title } = this.props;

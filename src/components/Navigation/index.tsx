@@ -18,7 +18,8 @@ interface Props {
 interface State {}
 
 
-class Navigation extends PureComponent<Props, State> {
+@withStyles(require('./style.scss'))
+export default class Navigation extends PureComponent<Props, State> {
   public render() {
     const { className } = this.props;
 
@@ -34,6 +35,3 @@ class Navigation extends PureComponent<Props, State> {
     );
   }
 }
-
-
-export default withStyles(Navigation, require('./style.scss'));

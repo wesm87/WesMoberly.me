@@ -1,6 +1,11 @@
+/**
+ * Register route.
+ */
 
-import React from 'react';
+import * as React from 'react';
+
 import Register from './Register';
+
 
 export const path = '/register';
 export const action = async (state) => {

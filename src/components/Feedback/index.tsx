@@ -1,24 +1,42 @@
+/**
+ * Feedback section.
+ */
 
-import React from 'react';
-import withStyles from 'isomorphic-style-loader/lib/withStyles';
-import s from './style.scss';
 
-function Feedback() {
-  return (
-    <div styleName="root">
-      <div styleName="container">
-        <a
-          styleName="link"
-          href="https://gitter.im/kriasoft/react-starter-kit"
-        >Ask a question</a>
-        <span styleName="spacer">|</span>
-        <a
-          styleName="link"
-          href="https://github.com/kriasoft/react-starter-kit/issues/new"
-        >Report an issue</a>
+import * as React from 'react';
+import * as withStyles from 'react-css-modules';
+
+import Link from 'components/Link';
+
+const { PureComponent } = React;
+
+
+interface Props {}
+interface State {}
+
+
+@withStyles(require('./style.scss'))
+export default class Feedback extends PureComponent<Props, State> {
+
+  public render() {
+    return (
+      <div styleName="root">
+        <div styleName="container">
+          <Link
+            styleName="link"
+            to="https://gitter.im/kriasoft/react-starter-kit"
+          >
+            Ask a question
+          </Link>
+          <span styleName="spacer">|</span>
+          <Link
+            styleName="link"
+            to="https://github.com/kriasoft/react-starter-kit/issues/new"
+          >
+            Report an issue
+          </Link>
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
 }
-
-export default withStyles(Feedback, s);

@@ -14,7 +14,8 @@ interface Props {}
 interface State {}
 
 
-class AppMain extends PureComponent<Props, State> {
+@withStyles(require('./style.scss'))
+export default class AppMain extends PureComponent<Props, State> {
   public render() {
     const { children } = this.props;
 
@@ -25,6 +26,3 @@ class AppMain extends PureComponent<Props, State> {
     );
   }
 }
-
-
-export default withStyles(AppMain, require('./style.scss'));

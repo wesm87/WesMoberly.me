@@ -1,5 +1,5 @@
 /**
- * Contact page route.
+ * Contact route.
  */
 
 import * as React from 'react';

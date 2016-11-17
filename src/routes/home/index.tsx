@@ -1,5 +1,5 @@
 /**
- * Home page route.
+ * Home route.
  */
 
 import * as React from 'react';

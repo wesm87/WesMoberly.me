@@ -15,14 +15,15 @@ interface Props {
 interface State {}
 
 
-const title = 'Error';
+@withStyles(require('./style.scss'))
+export default class ErrorPage extends PureComponent<Props, State> {
 
-class ErrorPage extends PureComponent<Props, State> {
+  private title = 'Error';
 
   public render() {
     return (
       <div>
-        <h1>{title}</h1>
+        <h1>{this.title}</h1>
         <p>Sorry, an critical error occurred on this page.</p>
       </div>
     );
@@ -31,8 +32,6 @@ class ErrorPage extends PureComponent<Props, State> {
   protected componentWillMount() {
     const { context } = this.props;
 
-    context.onSetTitle(title);
+    context.onSetTitle(this.title);
   }
 }
-
-export default withStyles(ErrorPage, require('./style.scss'));

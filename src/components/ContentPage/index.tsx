@@ -19,7 +19,8 @@ interface Props {
 interface State {}
 
 
-class ContentPage extends PureComponent<Props, State> {
+@withStyles(require('./style.scss'))
+export default class ContentPage extends PureComponent<Props, State> {
 
   protected static contextTypes: ComponentContext;
 
@@ -39,6 +40,3 @@ class ContentPage extends PureComponent<Props, State> {
     );
   }
 }
-
-
-export default withStyles(ContentPage, require('./style.scss'));

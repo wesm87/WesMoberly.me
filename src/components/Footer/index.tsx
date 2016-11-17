@@ -14,7 +14,8 @@ interface Props {}
 interface State {}
 
 
-class Footer extends PureComponent<Props, State> {
+@withStyles(require('./style.scss'))
+export default class Footer extends PureComponent<Props, State> {
   public render() {
     return (
       <div styleName="root">
@@ -31,6 +32,3 @@ class Footer extends PureComponent<Props, State> {
     );
   }
 }
-
-
-export default withStyles(Footer, require('./style.scss'));

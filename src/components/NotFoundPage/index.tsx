@@ -11,16 +11,19 @@ const { PureComponent } = React;
 interface Props {
   context: ComponentContext;
 }
+
 interface State {}
 
-const title = 'Page Not Found';
 
-class NotFoundPage extends PureComponent<Props, State> {
+@withStyles(require('./style.scss'))
+export default class NotFoundPage extends PureComponent<Props, State> {
+
+  private title = 'Page Not Found';
 
   public render() {
     return (
       <div>
-        <h1>{title}</h1>
+        <h1>{this.title}</h1>
         <p>Sorry, but the page you were trying to view does not exist.</p>
       </div>
     );
@@ -34,9 +37,7 @@ class NotFoundPage extends PureComponent<Props, State> {
       },
     } = this.props;
 
-    onSetTitle(title);
+    onSetTitle(this.title);
     onPageNotFound();
   }
 }
-
-export default withStyles(NotFoundPage, require('./style.scss'));

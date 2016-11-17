@@ -1,10 +1,20 @@
+/**
+ * App footer section.
+ */
 
-import { PureComponent } from 'react';
-import withStyles from 'react-css-modules';
+import * as React from 'react';
+import * as withStyles from 'react-css-modules';
 import Link from 'components/Link';
 
+const { PureComponent } = React;
 
-class Footer extends PureComponent {
+
+interface Props {}
+interface State {}
+
+
+@withStyles(require('./style.scss'))
+export default class Footer extends PureComponent<Props, State> {
   public render() {
     return (
       <div styleName="root">
@@ -21,6 +31,3 @@ class Footer extends PureComponent {
     );
   }
 }
-
-
-export default withStyles(Footer, require('./style.scss'));

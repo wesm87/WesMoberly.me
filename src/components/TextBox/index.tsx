@@ -15,7 +15,8 @@ interface Props {
 interface State {}
 
 
-class TextBox extends PureComponent<Props, State> {
+@withStyles(require('./style.scss'))
+export default class TextBox extends PureComponent<Props, State> {
 
   protected static defaultProps = {
     maxLines: 1,
@@ -54,6 +55,3 @@ class TextBox extends PureComponent<Props, State> {
     );
   }
 }
-
-
-export default withStyles(TextBox, require('./style.scss'));
