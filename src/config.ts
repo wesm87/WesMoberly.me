@@ -4,8 +4,8 @@
  * Project config.
  */
 
-import * as _ from 'lodash';
 import * as path from 'path';
+import { merge, result } from 'lodash';
 
 
 const configs = {
@@ -65,19 +65,11 @@ const configs = {
 const env = process.env.NODE_ENV || 'development';
 const baseConfig = configs.default;
 const envConfig = configs[env] || {};
-const config = _.merge({}, baseConfig, envConfig);
+const config = merge({}, baseConfig, envConfig);
 
-function configGet(propPath) {
-  const prop = _.get(config, propPath);
-
-  if (_.isFunction(prop)) {
-    return prop.bind(config)();
-  }
-
-  return prop;
-}
-
-config.get = configGet.bind(config);
+config.get = (propPath: string | string[], defaultValue?: any): any => (
+  result(config, propPath, defaultValue)
+);
 
 
 export default config;

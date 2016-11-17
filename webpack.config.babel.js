@@ -1,10 +1,13 @@
 
 import { merge } from 'lodash';
 import path from 'path';
+import fs from 'fs';
 import webpack from 'webpack';
 import AssetsPlugin from 'assets-webpack-plugin';
-import VendorChunkPlugin from 'webpack-vendor-chunk-plugin';
+import StatsPlugin from 'stats-webpack-plugin';
+import ExtractTextPlugin from 'extract-text-webpack-plugin';
 import EnvironmentPlugin from 'inline-environment-variables-webpack-plugin';
+import VendorChunkPlugin from 'webpack-vendor-chunk-plugin';
 import eyeglass from 'eyeglass';
 import autoprefixer from 'autoprefixer';
 import postcssInitial from 'postcss-initial';
@@ -33,6 +36,14 @@ const ENV_WHITELIST = [
   'NODE_ENV',
 ];
 
+const nodeModules = {};
+fs.readdirSync(path.join(__dirname, 'node_modules'))
+  .filter(x => ['.bin'].indexOf(x) === -1)
+  .forEach((mod) => {
+    nodeModules[mod] = `commonjs ${mod}`;
+  });
+
+
 //
 // Common configuration chunk to be used for both
 // client-side (client.js) and server-side (server.js) bundles
@@ -42,7 +53,7 @@ const config = {
   context: PATHS.source,
 
   output: {
-    publicPath: '/',
+    publicPath: '/assets/',
     sourcePrefix: '  ',
   },
 
@@ -71,6 +82,14 @@ const config = {
   module: {
     loaders: [
       {
+        test: /\.ts(x?)$/,
+        include: PATHS.source,
+        loaders: [
+          'babel-loader',
+          'ts-loader',
+        ],
+      },
+      {
         test: /\.js(x?)$/,
         include: PATHS.source,
         loaders: [
@@ -78,11 +97,16 @@ const config = {
         ],
       },
       {
-        test: /\.ts(x?)$/,
-        include: PATHS.source,
+        test: /\.js$/,
+        include: /node_modules\/defaults-deep/,
         loaders: [
-          'babel-loader',
-          'ts-loader',
+          'unlazy-loader',
+        ],
+      },
+      {
+        test: /\.json$/,
+        loaders: [
+          'json-loader',
         ],
       },
       {
@@ -97,18 +121,12 @@ const config = {
       {
         test: /\.scss$/,
         include: PATHS.source,
-        loaders: [
+        loaders: ExtractTextPlugin.extract([
           'isomorphic-style-loader',
           'css-loader',
           'postcss-loader',
           'sass-loader',
-        ],
-      },
-      {
-        test: /\.json$/,
-        loaders: [
-          'json-loader',
-        ],
+        ]),
       },
       {
         test: /\.txt$/,
@@ -141,6 +159,15 @@ const config = {
   plugins: [
     new EnvironmentPlugin(ENV_WHITELIST, { warnings: false }),
     new webpack.NamedModulesPlugin(),
+    new ExtractTextPlugin({
+      filename: '[name].css',
+      allChunks: true,
+      disable: !DEBUG,
+    }),
+    new StatsPlugin('stats.json', {
+      chunkModules: true,
+      exclude: [/node_modules/],
+    }),
     new webpack.LoaderOptionsPlugin({
       options: {
         cssLoader: {
@@ -271,9 +298,10 @@ const serverConfig = merge({}, config, {
     libraryTarget: 'commonjs2',
   },
   target: 'node',
-  externals: [
-    /^\.\/assets$/,
-  ],
+  externals: {
+    assets: 'assets',
+    ...nodeModules,
+  },
   node: {
     console: false,
     global: false,

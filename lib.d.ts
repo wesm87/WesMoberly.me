@@ -10,6 +10,24 @@ declare var require: {
   ensure: (paths: string[], callback: (require: <T>(path: string) => T) => void) => void;
 };
 
+declare module 'json-regulator' {
+  type RegulatorKeys = string | string[];
+
+  interface Regulate {
+    (
+      config: JSON,
+      promotions: RegulatorKeys,
+      eliminations?: RegulatorKeys,
+      immutables?: RegulatorKeys,
+      options?: {
+        overwrite?: boolean;
+      },
+    ): JSON;
+  }
+
+  export default Regulate;
+}
+
 interface ComponentContext {
   insertCss?(): void;
   onSetTitle?(title: string): void;
