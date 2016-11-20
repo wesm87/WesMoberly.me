@@ -5,9 +5,12 @@
 import * as React from 'react';
 import Login from './Login';
 
-export const path = '/login';
-export const action = async (state) => {
-  const title = 'Log In';
-  state.context.onSetTitle(title);
-  return <Login title={title} />;
-};
+
+const path = '/login';
+
+const render = async (state) => (
+  <Login title="Log In" />
+);
+
+
+export default { path, render };

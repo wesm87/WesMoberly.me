@@ -3,13 +3,14 @@
  */
 
 import * as React from 'react';
-
 import Register from './Register';
 
 
-export const path = '/register';
-export const action = async (state) => {
-  const title = 'New User Registration';
-  state.context.onSetTitle(title);
-  return <Register title={title} />;
-};
+const path = '/register';
+
+const render = async (state) => (
+  <Register title="New User Registration" />
+);
+
+
+export default { path, render };
