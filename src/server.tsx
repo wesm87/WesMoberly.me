@@ -5,6 +5,9 @@
 // tslint:disable:no-console
 
 import 'babel-polyfill';
+import * as React from 'react';
+import * as ReactDOM from 'react-dom/server';
+import { ServerRouter, createServerRenderContext } from 'react-router';
 
 import * as path from 'path';
 import * as express from 'express';
@@ -13,13 +16,15 @@ import * as bodyParser from 'body-parser';
 import * as expressJwt from 'express-jwt';
 import * as expressGraphQL from 'express-graphql';
 import * as jwt from 'jsonwebtoken';
-import * as ReactDOM from 'react-dom/server';
 import * as PrettyError from 'pretty-error';
 
 import passport from 'core/passport';
 import schema from 'data/schema';
-import Router from 'routes';
 import config from 'config';
+
+import App from 'components/App';
+
+const { renderToString } = ReactDOM;
 
 
 export interface AssetsJS {
@@ -31,9 +36,9 @@ export interface AssetsJS {
   };
 }
 
-const assets = <AssetsJS> require('./assets');
+const assets = require('./assets') as AssetsJS;
 
-export const server = <express.Express> express();
+export const server = express() as express.Express;
 
 //
 // Tell any CSS tooling (such as Material UI) to use all vendor prefixes if the
@@ -98,50 +103,60 @@ function renderView(viewName, data) {
   interface ViewTemplate {
     (data: Object): string;
   }
-  const template = <ViewTemplate> require(`./views/${viewName}.pug`);
+  const template = require(`./views/${viewName}.pug`) as ViewTemplate;
 
   return template(data);
 }
 
 server.get('*', async (req, res, next) => {
   try {
-    let statusCode = 200;
-    const data = {
-      title: '',
-      description: '',
-      css: '',
-      body: '',
-      trackingId: '',
-      entry: assets.client.js,
-    };
+    // const statusCode = 200;
+    // const data = {
+    //   title: '',
+    //   description: '',
+    //   body: '',
+    //   entry: assets.client.js,
+    // };
+    //
+    // res.status(statusCode);
+    // res.send(renderView('index', data));
+    const context = createServerRenderContext();
+    let markup = renderToString(
+      <ServerRouter
+        location={req.url}
+        context={context}
+      >
+        <App />
+      </ServerRouter>
+    );
 
-    if (process.env.NODE_ENV === 'production') {
-      data.trackingId = config.get('analytics.google.trackingId');
+    const result = context.getResult();
+
+    if (result.redirect) {
+      res.writeHead(301, {
+        Location: result.redirect.pathname,
+      });
+      res.end();
+    } else {
+
+      // the result will tell you if there were any misses, if so
+      // we can send a 404 and then do a second render pass with
+      // the context to clue the <Miss> components into rendering
+      // this time (on the client they know from componentDidMount)
+      if (result.missed) {
+        res.writeHead(404);
+        markup = renderToString(
+          <ServerRouter
+            location={req.url}
+            context={context}
+          >
+            <App/>
+          </ServerRouter>
+        );
+      }
+      res.write(markup);
+      res.end();
     }
-
-    const css = [];
-    const context = {
-      insertCss(styles) {
-        css.push(styles._getCss());
-      },
-      onSetTitle(value) {
-        data.title = value;
-      },
-      onSetMeta(key, value) {
-        data[key] = value;
-      },
-      onPageNotFound() {
-        statusCode = 404;
-      },
-    };
-
-    await Router.dispatch({ path: req.path, query: req.query, context }, (state, component) => {
-      data.body = ReactDOM.renderToString(component);
-      data.css = css.join('');
-    });
-
-    res.status(statusCode);
-    res.send(renderView('index', data));
   } catch (err) {
     next(err);
   }
@@ -154,16 +169,7 @@ const pe = new PrettyError();
 pe.skipNodeFiles();
 pe.skipPackage('express');
 
-interface ExpressErrorMiddleware {
-  (
-    err: Object,
-    req: express.Request,
-    res: express.Response,
-    next: express.NextFunction,
-  ): void;
-}
-
-const errorMiddleware = <ExpressErrorMiddleware> (err, req, res, next) => {
+const errorMiddleware: express.ErrorMiddleware = (err, req, res, next) => {
   console.log(pe.render(err));
   const statusCode = err.status || 500;
   const data = {
