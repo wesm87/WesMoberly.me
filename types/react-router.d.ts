@@ -2,14 +2,6 @@
  * Custom typedef for React Router v4.
  */
 
-/**
- * pattern: (string) the portion of the pattern matched.
- * pathname: (string) the portion of pathname matched.
- * isExact: (bool) whether or not the match is exact (v. partial).
- * location: the location matched.
- * params: the values parsed from the pathname corresponding by name to the dynamic segments of the pattern.
- */
-
 declare module 'react-router' {
   export type Action = 'PUSH' | 'REPLACE' | 'POP';
 
@@ -162,9 +154,13 @@ declare module 'react-router' {
   export const HashRouter: HashRouter;
 
 
+  export type ServerRouterContext = {
+    getResult: Function,
+  };
+
   export interface ServerRouterProps extends React.ClassAttributes<ServerRouter> {
     basename?: string;
-    context: Object;
+    context: ServerRouterContext;
     location: string;
     children?: React.ReactNode;
   }
@@ -195,5 +191,5 @@ declare module 'react-router' {
 
   export const StaticRouter;
 
-  export function createServerRenderContext(): Object
+  export function createServerRenderContext(): ServerRouterContext;
 }

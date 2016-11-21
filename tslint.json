@@ -10,6 +10,7 @@
     "no-default-export": false,
     "import-name": false,
     "export-name": false,
+    "no-namespace": false,
     "no-consecutive-blank-lines": false,
     "object-literal-sort-keys": false,
     "no-empty-interfaces": false,
