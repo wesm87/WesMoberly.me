@@ -3,7 +3,7 @@
  */
 
 import * as React from 'react';
-import * as EventEmitter from '@types/eventemitter3';
+import { EventEmitter } from 'eventemitter3';
 
 import { canUseDOM } from 'core/utils/DOM';
 

@@ -10,7 +10,6 @@ const { PureComponent } = React;
 
 
 interface Props {
-  context: ComponentContext;
   path: string;
   content: string;
   title?: string;
@@ -21,14 +20,6 @@ interface State {}
 
 @withStyles(require('./style.scss'))
 export default class ContentPage extends PureComponent<Props, State> {
-
-  protected static contextTypes: ComponentContext;
-
-  public componentWillMount() {
-    const { context: { onSetTitle } } = this.props;
-    onSetTitle(this.props.title);
-  }
-
   public render() {
     return (
       <div styleName="root">

@@ -4,7 +4,6 @@
 
 import * as React from 'react';
 import * as withStyles from 'react-css-modules';
-import { noop } from 'lodash';
 
 import AppHeader from 'components/AppHeader';
 import AppMain from 'components/AppMain';
@@ -14,10 +13,7 @@ const { PureComponent } = React;
 
 
 interface Props {
-  context?: ComponentContext;
-  error: {
-    readonly [index: string]: any;
-  };
+  children?: React.ReactNode;
 }
 
 interface State {}
@@ -26,11 +22,7 @@ interface State {}
 @withStyles(require('./styles.scss'))
 export default class App extends PureComponent<Props, State> {
   public render() {
-    const { children, error } = this.props;
-
-    if (error) {
-      return null;
-    }
+    const { children } = this.props;
 
     return (
       <div className="c-app">
@@ -41,23 +33,5 @@ export default class App extends PureComponent<Props, State> {
         <AppFooter />
       </div>
     );
-  }
-
-  protected getChildContext() {
-    const {
-      context: {
-        insertCss = noop,
-        onSetTitle = noop,
-        onSetMeta = noop,
-        onPageNotFound = noop,
-      },
-    } = this.props;
-
-    return {
-      insertCss,
-      onSetTitle,
-      onSetMeta,
-      onPageNotFound,
-    };
   }
 }

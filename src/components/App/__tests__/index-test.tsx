@@ -1,15 +1,16 @@
-/* eslint-disable import/first */
+/**
+ * Unit tests.
+ */
 
 jest.unmock('components/App');
 
+import * as React from 'react';
 import App from 'components/App';
-import React from 'react';
-import { shallow } from 'enzyme';
 
 describe('App', () => {
   it('renders children correctly', () => {
     const app = (
-      <App context={{ insertCss: () => {} }}>
+      <App>
         <div className="child" />
       </App>
     );
