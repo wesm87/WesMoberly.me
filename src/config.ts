@@ -5,7 +5,7 @@
  */
 
 import * as path from 'path';
-import { merge, result } from 'lodash';
+import { merge, get, isFunction } from 'lodash';
 
 
 const configs = {
@@ -26,6 +26,11 @@ const configs = {
       port: process.env.SERVER_PORT || 3000,
       host: process.env.SERVER_HOST || 'localhost',
       url: () => `${this.server.host}:${this.server.port}`,
+    },
+
+    webpack: {
+      port: process.env.WEBPACK_PORT || 3001,
+      host: () => this.server.host,
     },
 
     db: {
@@ -67,9 +72,15 @@ const baseConfig = configs.default;
 const envConfig = configs[env] || {};
 const config = merge({}, baseConfig, envConfig);
 
-config.get = (propPath: string | string[], defaultValue?: any): any => (
-  result(config, propPath, defaultValue)
-);
+config.get = (propPath: string | string[], defaultValue?: any): any => {
+  const result = get(config, propPath, defaultValue);
+
+  if (isFunction(result)) {
+    return result.bind(config)();
+  }
+
+  return result;
+};
 
 
 export default config;

@@ -6,7 +6,7 @@
 
 import 'babel-polyfill';
 import * as React from 'react';
-import * as ReactDOM from 'react-dom/server';
+import { renderToString } from 'react-dom/server';
 import { ServerRouter, createServerRenderContext } from 'react-router';
 
 import * as path from 'path';
@@ -24,31 +24,29 @@ import config from 'config';
 
 import App from 'components/App';
 
-const { renderToString } = ReactDOM;
 
+const server = express();
+const assets = require('./assets') as AssetsJSON;
 
-export interface AssetsJS {
-  client: {
-    js: string;
-  };
-  vendor: {
-    js: string;
-  };
+function renderView(viewName: string, data: ViewTemplateData): string {
+  const templateData = Object.assign({}, data, { assets });
+  const renderTemplate = require(`./views/${viewName}.pug`) as RenderTemplate;
+
+  return renderTemplate(templateData);
 }
 
-const assets = require('./assets') as AssetsJS;
+function renderApp(req, context) {
+  return renderToString(
+    <ServerRouter
+      location={req.url}
+      context={context}
+    >
+      <App />
+    </ServerRouter>
+  );
+}
 
-export const server = express() as express.Express;
 
-//
-// Tell any CSS tooling (such as Material UI) to use all vendor prefixes if the
-// user agent is not known.
-// -----------------------------------------------------------------------------
-export const navigator = {
-  userAgent: 'all',
-};
-
-//
 // Register Node.js middleware
 // -----------------------------------------------------------------------------
 server.use(express.static(path.join(__dirname, 'public')));
@@ -56,7 +54,7 @@ server.use(cookieParser());
 server.use(bodyParser.urlencoded({ extended: true }));
 server.use(bodyParser.json());
 
-//
+
 // Authentication
 // -----------------------------------------------------------------------------
 server.use(expressJwt({
@@ -85,7 +83,7 @@ server.get('/login/facebook/return',
   },
 );
 
-//
+
 // Register API middleware
 // -----------------------------------------------------------------------------
 server.use('/graphql', expressGraphQL(req => ({
@@ -95,41 +93,15 @@ server.use('/graphql', expressGraphQL(req => ({
   pretty: process.env.NODE_ENV !== 'production',
 })));
 
-//
+
 // Register server-side rendering middleware
 // -----------------------------------------------------------------------------
-
-function renderView(viewName, data) {
-  interface ViewTemplate {
-    (data: Object): string;
-  }
-  const template = require(`./views/${viewName}.pug`) as ViewTemplate;
-
-  return template(data);
-}
-
 server.get('*', async (req, res, next) => {
   try {
-    // const statusCode = 200;
-    // const data = {
-    //   title: '',
-    //   description: '',
-    //   body: '',
-    //   entry: assets.client.js,
-    // };
-    //
-    // res.status(statusCode);
-    // res.send(renderView('index', data));
     const context = createServerRenderContext();
-    let markup = renderToString(
-      <ServerRouter
-        location={req.url}
-        context={context}
-      >
-        <App />
-      </ServerRouter>
-    );
-
+    const data = {
+      body: renderApp(req, context),
+    };
     const result = context.getResult();
 
     if (result.redirect) {
@@ -145,16 +117,10 @@ server.get('*', async (req, res, next) => {
       // this time (on the client they know from componentDidMount)
       if (result.missed) {
         res.writeHead(404);
-        markup = renderToString(
-          <ServerRouter
-            location={req.url}
-            context={context}
-          >
-            <App/>
-          </ServerRouter>
-        );
+        data.body = renderApp(req, context);
       }
-      res.write(markup);
+
+      res.write(renderView('index', data));
       res.end();
     }
   } catch (err) {
@@ -162,7 +128,7 @@ server.get('*', async (req, res, next) => {
   }
 });
 
-//
+
 // Error handling
 // -----------------------------------------------------------------------------
 const pe = new PrettyError();
@@ -173,8 +139,11 @@ const errorMiddleware: express.ErrorMiddleware = (err, req, res, next) => {
   console.log(pe.render(err));
   const statusCode = err.status || 500;
   const data = {
-    message: err.message,
-    stack: process.env.NODE_ENV === 'production' ? '' : err.stack,
+    error: {
+      status: statusCode,
+      message: err.message,
+      stack: process.env.NODE_ENV === 'production' ? '' : err.stack,
+    },
   };
   res.status(statusCode);
   res.send(renderView('error', data));
@@ -182,12 +151,12 @@ const errorMiddleware: express.ErrorMiddleware = (err, req, res, next) => {
 
 server.use(errorMiddleware);
 
-//
+
 // Launch the server
 // -----------------------------------------------------------------------------
 const serverPort = config.get('server.port');
 const serverURL = config.get('server.url');
 server.listen(serverPort, () => {
-  /* eslint-disable no-console */
+  // eslint-disable-next-line no-console
   console.log(`The server is running at ${serverURL}`);
 });

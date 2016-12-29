@@ -1,3 +1,6 @@
+/**
+ * New Schema
+ */
 
 import { GraphQLList as List } from 'graphql';
 import fetch from 'core/fetch';

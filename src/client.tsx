@@ -17,6 +17,6 @@ const renderApp = () => (
   </BrowserRouter>
 );
 
-const appContainer = document.querySelector('app');
+const appContainer = document.querySelector('#app');
 
 ReactDOM.render(renderApp(), appContainer);

@@ -8,9 +8,7 @@ import * as withStyles from 'react-css-modules';
 const { PureComponent } = React;
 
 
-interface Props {
-  context: ComponentContext;
-}
+interface Props {}
 
 interface State {}
 
@@ -27,11 +25,5 @@ export default class ErrorPage extends PureComponent<Props, State> {
         <p>Sorry, an critical error occurred on this page.</p>
       </div>
     );
-  }
-
-  protected componentWillMount() {
-    const { context } = this.props;
-
-    context.onSetTitle(this.title);
   }
 }

@@ -8,9 +8,7 @@ import * as withStyles from 'react-css-modules';
 const { PureComponent } = React;
 
 
-interface Props {
-  context: ComponentContext;
-}
+interface Props {}
 
 interface State {}
 
@@ -27,17 +25,5 @@ export default class NotFoundPage extends PureComponent<Props, State> {
         <p>Sorry, but the page you were trying to view does not exist.</p>
       </div>
     );
-  }
-
-  protected componentWillMount() {
-    const {
-      context: {
-        onSetTitle,
-        onPageNotFound,
-      },
-    } = this.props;
-
-    onSetTitle(this.title);
-    onPageNotFound();
   }
 }

@@ -1,13 +1,18 @@
 doctype html
-html(class="no-js", lang="")
+html(class="no-js", lang="en")
   head
     meta(charset="utf-8")
-    meta(http-equiv="x-ua-compatible", content="ie=edge")
+    meta(http-equiv="x-ua-compatible",content="ie=edge")
     title= title
     meta(name="description", description=description)
     meta(name="viewport", content="width=device-width, initial-scale=1")
     link(rel="apple-touch-icon", href="apple-touch-icon.png")
-    style#css!= css
+    if assets.vendor.css
+      link(rel="stylesheet", href=require(assets.vendor.css))
+    if assets.client.css
+      link(rel="stylesheet", href=require(assets.client.css))
   body
     #app!= body
-    script(src=entry)
+
+    script(src=require(assets.vendor.js))
+    script(src=require(assets.client.js))
