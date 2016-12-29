@@ -1,5 +1,5 @@
 
-import del from 'del';
+import * as del from 'del';
 import fs from './lib/fs';
 
 /**

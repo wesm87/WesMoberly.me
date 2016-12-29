@@ -1,8 +1,9 @@
 
-import GitRepo from 'git-repository';
 import run from './run';
 import build from './build';
 import fetch from './lib/fetch';
+
+const GitRepo = require('git-repository');
 
 // TODO: Update deployment URL
 // For more information visit http://gitolite.com/deploy.html

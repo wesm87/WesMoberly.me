@@ -1,7 +1,8 @@
 
+
 import webpack from 'webpack';
-import WebpackDevServer from 'webpack-dev-server';
-import webpackConfig from '../webpack.config.babel';
+import * as WebpackDevServer from 'webpack-dev-server';
+import { config } from '../webpack.config';
 import run from './run';
 import clean from './clean';
 import copy from './copy';
@@ -17,7 +18,7 @@ async function start() {
   await run(clean);
   await run(copy.bind(undefined, { watch: true }));
   await new Promise((resolve) => {
-    const bundler = webpack(webpackConfig);
+    const bundler = webpack(config);
     const serverHost = 'localhost';
     const serverPort = 3000;
     const serverURL = makeURL(serverHost, serverPort);
@@ -29,8 +30,8 @@ async function start() {
     new WebpackDevServer(bundler, {
       hot: true,
       historyApiFallback: true,
-      publicPath: webpackConfig.output.publicPath,
-      contentBase: webpackConfig.output.path,
+      publicPath: config.output.publicPath,
+      contentBase: config.output.path,
       proxy: {
         '*': serverURL,
       },
