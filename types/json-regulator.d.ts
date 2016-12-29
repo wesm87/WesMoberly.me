@@ -5,17 +5,23 @@
 declare module 'json-regulator' {
   type RegulatorKeys = string | string[];
 
+  type Config = {
+    [key: string]: any;
+  };
+
   interface Regulate {
     (
-      config: JSON,
+      config: Config,
       promotions: RegulatorKeys,
       eliminations?: RegulatorKeys,
       immutables?: RegulatorKeys,
       options?: {
         overwrite?: boolean;
       },
-    ): JSON;
+    ): Config;
   }
 
-  export default Regulate;
+  const regulate: Regulate;
+
+  export default regulate;
 }
