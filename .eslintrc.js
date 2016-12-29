@@ -18,6 +18,7 @@ module.exports = {
   plugins: [
     'react',
     'import',
+    'pug',
   ],
   settings: {
     'import/resolver': {

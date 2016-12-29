@@ -1,6 +1,8 @@
 {
   "compilerOptions": {
     "target": "es6",
+    "experimentalDecorators": true,
+    "removeComments": true,
     "sourceMap": true,
     "jsx": "react",
     "baseUrl": ".",
@@ -10,6 +12,10 @@
         "src/*"
       ]
     }
+  },
+  "awesomeTypescriptLoaderOptions": {
+    "useBabel": true,
+    "useCache": true
   },
   "exclude": [
     "node_modules"
