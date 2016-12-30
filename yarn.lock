@@ -2,6 +2,165 @@
 # yarn lockfile v1
 
 
+"@material/animation@^0.1.0":
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/@material/animation/-/animation-0.1.0.tgz#1f0348c0df4e2d5dabe284b6cced811ac608346a"
+
+"@material/auto-init@^0.1.0":
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/@material/auto-init/-/auto-init-0.1.1.tgz#16a5c37061be71bdcb7b5abc30f6e9785d58c777"
+
+"@material/base@^0.1.0":
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/@material/base/-/base-0.1.0.tgz#aae23050425f3c8d2b67b370ffc667dc042db352"
+
+"@material/button@^0.1.0":
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/@material/button/-/button-0.1.0.tgz#cbcd8674fb45764e4e326e334bec6a4f09a8f37d"
+  dependencies:
+    "@material/animation" "^0.1.0"
+    "@material/elevation" "^0.1.0"
+    "@material/theme" "^0.1.0"
+    "@material/typography" "^0.1.0"
+
+"@material/card@^0.1.0":
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/@material/card/-/card-0.1.0.tgz#45aea15f21ba6a0f7cb25a1233481a2f1de9e09f"
+  dependencies:
+    "@material/elevation" "^0.1.0"
+    "@material/theme" "^0.1.0"
+    "@material/typography" "^0.1.0"
+
+"@material/checkbox@^0.1.0":
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/@material/checkbox/-/checkbox-0.1.0.tgz#0dc1dedc08a992b89d6ef891625af616ed095ad4"
+  dependencies:
+    "@material/animation" "^0.1.0"
+    "@material/base" "^0.1.0"
+    "@material/theme" "^0.1.0"
+
+"@material/drawer@^0.1.0":
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/@material/drawer/-/drawer-0.1.0.tgz#db88172391c133ab9b3202f7b7912cc587f61aac"
+  dependencies:
+    "@material/animation" "^0.1.0"
+    "@material/base" "^0.1.0"
+    "@material/elevation" "^0.1.0"
+    "@material/rtl" "^0.1.0"
+    "@material/theme" "^0.1.0"
+    "@material/typography" "^0.1.0"
+
+"@material/elevation@^0.1.0":
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/@material/elevation/-/elevation-0.1.0.tgz#d2363eaa7c7d0541ad191b0f34c73694a9b7d372"
+  dependencies:
+    "@material/animation" "^0.1.0"
+
+"@material/fab@^0.1.0":
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/@material/fab/-/fab-0.1.0.tgz#c605788ea8b7330cc5b3ccc24e84f3ef5a097e3c"
+  dependencies:
+    "@material/animation" "^0.1.0"
+    "@material/elevation" "^0.1.0"
+    "@material/theme" "^0.1.0"
+
+"@material/form-field@^0.1.0":
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/@material/form-field/-/form-field-0.1.0.tgz#389cd84de1ca2bd473ed7d503b9ee97afa96075e"
+  dependencies:
+    "@material/rtl" "^0.1.0"
+    "@material/theme" "^0.1.0"
+    "@material/typography" "^0.1.0"
+
+"@material/icon-toggle@^0.1.0":
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/@material/icon-toggle/-/icon-toggle-0.1.0.tgz#dacfb5cfec206801009b9e00e1cf32e7ed803c42"
+  dependencies:
+    "@material/animation" "^0.1.0"
+    "@material/base" "^0.1.0"
+    "@material/ripple" "^0.1.0"
+    "@material/theme" "^0.1.0"
+
+"@material/list@^0.1.0":
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/@material/list/-/list-0.1.0.tgz#c8a24bb4d4639e981fd7a271e4afbddbaea39748"
+  dependencies:
+    "@material/rtl" "^0.1.0"
+    "@material/theme" "^0.1.0"
+    "@material/typography" "^0.1.0"
+
+"@material/menu@^0.1.0":
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/@material/menu/-/menu-0.1.0.tgz#6af489b18e47e2e92edc1e0969d5601c441416d9"
+  dependencies:
+    "@material/animation" "^0.1.0"
+    "@material/base" "^0.1.0"
+    "@material/elevation" "^0.1.0"
+    "@material/theme" "^0.1.0"
+    "@material/typography" "^0.1.0"
+
+"@material/radio@^0.1.0":
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/@material/radio/-/radio-0.1.0.tgz#b0c07ec4017c1e8d8ccf4ddda83bd18e8de0ee77"
+  dependencies:
+    "@material/animation" "^0.1.0"
+    "@material/base" "^0.1.0"
+    "@material/ripple" "^0.1.0"
+    "@material/theme" "^0.1.0"
+
+"@material/ripple@^0.1.0":
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/@material/ripple/-/ripple-0.1.0.tgz#b6fe5c4fc1a509aee76c2dd8555844dce4b61f8d"
+  dependencies:
+    "@material/animation" "^0.1.0"
+    "@material/base" "^0.1.0"
+    "@material/theme" "^0.1.0"
+
+"@material/rtl@^0.1.0":
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/@material/rtl/-/rtl-0.1.0.tgz#990946ba31c5af76b085bc445ba9054708afb9e1"
+
+"@material/select@^0.1.0":
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/@material/select/-/select-0.1.0.tgz#2c980e6257e0adefe88e68b4ef433ca51008b2b0"
+  dependencies:
+    "@material/animation" "^0.1.0"
+    "@material/base" "^0.1.0"
+    "@material/list" "^0.1.0"
+    "@material/menu" "^0.1.0"
+    "@material/rtl" "^0.1.0"
+    "@material/theme" "^0.1.0"
+    "@material/typography" "^0.1.0"
+
+"@material/snackbar@^0.1.0":
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/@material/snackbar/-/snackbar-0.1.0.tgz#9a261fe0c764d6b8bc22e3c6f6969505b8392b4a"
+  dependencies:
+    "@material/animation" "^0.1.0"
+    "@material/base" "^0.1.0"
+    "@material/button" "^0.1.0"
+    "@material/rtl" "^0.1.0"
+    "@material/theme" "^0.1.0"
+    "@material/typography" "^0.1.0"
+
+"@material/textfield@^0.1.0":
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/@material/textfield/-/textfield-0.1.0.tgz#910423e4243214ffe5394e0aee2a1257858a23f8"
+  dependencies:
+    "@material/animation" "^0.1.0"
+    "@material/base" "^0.1.0"
+    "@material/rtl" "^0.1.0"
+    "@material/theme" "^0.1.0"
+    "@material/typography" "^0.1.0"
+
+"@material/theme@^0.1.0":
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/@material/theme/-/theme-0.1.0.tgz#39a8b46a30781517e2d3db81a253eefc30f351a3"
+
+"@material/typography@^0.1.0":
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/@material/typography/-/typography-0.1.0.tgz#bb6a77a3ec8747e3ff887dd24cfdf9b40788e5f3"
+
 "@types/bluebird@^3.0.36":
   version "3.0.37"
   resolved "https://registry.yarnpkg.com/@types/bluebird/-/bluebird-3.0.37.tgz#2e76b394aa9bea40d04241a31c0887a260283388"
@@ -35,12 +194,6 @@
 "@types/eventemitter3@^1.2.0":
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/@types/eventemitter3/-/eventemitter3-1.2.0.tgz#4ebc1b9c6e92417c8e5c49204bb48189f7463dca"
-
-"@types/express-graphql@^0.0.33":
-  version "0.0.33"
-  resolved "https://registry.yarnpkg.com/@types/express-graphql/-/express-graphql-0.0.33.tgz#4045a19169fb676c5aa0c0db7380048ec5839a5b"
-  dependencies:
-    "@types/express" "*"
 
 "@types/express-jwt@^0.0.33":
   version "0.0.33"
@@ -79,10 +232,6 @@
     "@types/minimatch" "*"
     "@types/node" "*"
 
-"@types/graphql@^0.8.2":
-  version "0.8.5"
-  resolved "https://registry.yarnpkg.com/@types/graphql/-/graphql-0.8.5.tgz#3f06ab58a5f37a94c94fafe0767efa0fcd0e7b3a"
-
 "@types/history@*", "@types/history@^2.0.39":
   version "2.0.42"
   resolved "https://registry.yarnpkg.com/@types/history/-/history-2.0.42.tgz#6ddb556f1a3b870e2e4fde131f1b13cbf3a99c4d"
@@ -104,6 +253,13 @@
 "@types/lodash@^4.14.40":
   version "4.14.45"
   resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.45.tgz#db20238f23fa195d6fb8f9ff7988e8651fc8c302"
+
+"@types/material-ui@^0.16.46":
+  version "0.16.46"
+  resolved "https://registry.yarnpkg.com/@types/material-ui/-/material-ui-0.16.46.tgz#7b7a64132cba9bdfa0aac0bd0c0dd70823c155da"
+  dependencies:
+    "@types/react" "*"
+    "@types/react-addons-linked-state-mixin" "*"
 
 "@types/mime@*":
   version "0.0.29"
@@ -151,6 +307,12 @@
   resolved "https://registry.yarnpkg.com/@types/passport/-/passport-0.3.1.tgz#20719ff1bcc30e2af48dab71f1f269cff3399524"
   dependencies:
     "@types/express" "*"
+
+"@types/react-addons-linked-state-mixin@*":
+  version "0.14.16"
+  resolved "https://registry.yarnpkg.com/@types/react-addons-linked-state-mixin/-/react-addons-linked-state-mixin-0.14.16.tgz#f1885f566305394b8e7aca7c6a36e305098769f1"
+  dependencies:
+    "@types/react" "*"
 
 "@types/react-css-modules@^3.7.5":
   version "3.7.5"
@@ -4646,6 +4808,31 @@ marked-terminal@^1.6.2:
 marked@^0.3.6:
   version "0.3.6"
   resolved "https://registry.yarnpkg.com/marked/-/marked-0.3.6.tgz#b2c6c618fccece4ef86c4fc6cb8a7cbf5aeda8d7"
+
+material-components-web@^0.1.1:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/material-components-web/-/material-components-web-0.1.1.tgz#ca2190f909137f59808e2af64915c61e3374e58a"
+  dependencies:
+    "@material/animation" "^0.1.0"
+    "@material/auto-init" "^0.1.0"
+    "@material/base" "^0.1.0"
+    "@material/button" "^0.1.0"
+    "@material/card" "^0.1.0"
+    "@material/checkbox" "^0.1.0"
+    "@material/drawer" "^0.1.0"
+    "@material/elevation" "^0.1.0"
+    "@material/fab" "^0.1.0"
+    "@material/form-field" "^0.1.0"
+    "@material/icon-toggle" "^0.1.0"
+    "@material/list" "^0.1.0"
+    "@material/menu" "^0.1.0"
+    "@material/radio" "^0.1.0"
+    "@material/ripple" "^0.1.0"
+    "@material/select" "^0.1.0"
+    "@material/snackbar" "^0.1.0"
+    "@material/textfield" "^0.1.0"
+    "@material/theme" "^0.1.0"
+    "@material/typography" "^0.1.0"
 
 math-expression-evaluator@^1.2.14:
   version "1.2.14"
