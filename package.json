@@ -1,7 +1,7 @@
 {
   "private": true,
   "engines": {
-    "node": ">=5.0"
+    "node": ">= 6.0"
   },
   "scripts": {
     "lint": "eslint src tools",
@@ -12,6 +12,20 @@
     "build": "ts-node tools/run build",
     "deploy": "ts-node tools/run deploy",
     "start": "ts-node tools/run start"
+  },
+  "jest": {
+    "rootDir": "./src",
+    "testPathDirs": [
+      "<rootDir>",
+      "<rootDir>/../test/"
+    ],
+    "moduleNameMapper": {
+      "\\.scss$": "SCSSStub"
+    },
+    "unmockedModulePathPatterns": [
+      "react",
+      "enzyme"
+    ]
   },
   "dependencies": {
     "babel-polyfill": "^6.16.0",
@@ -179,19 +193,5 @@
     "webpack-combine-loaders": "^2.0.3",
     "webpack-dev-server": "^2.1.0-beta.11",
     "webpack-vendor-chunk-plugin": "^1.0.0"
-  },
-  "jest": {
-    "rootDir": "./src",
-    "testPathDirs": [
-      "<rootDir>",
-      "<rootDir>/../test/"
-    ],
-    "moduleNameMapper": {
-      "\\.scss$": "SCSSStub"
-    },
-    "unmockedModulePathPatterns": [
-      "react",
-      "enzyme"
-    ]
   }
 }
