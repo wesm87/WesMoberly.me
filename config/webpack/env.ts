@@ -4,13 +4,6 @@
 
 import makeConfig from '../../tools/make-config';
 
-
-const isDev = !process.argv.includes('--release');
-const isVerbose = process.argv.includes('--verbose');
-
-process.env.NODE_ENV = isDev ? 'development' : 'production';
-
-
 interface EnvConfig {
   isProd?: boolean;
   isDev?: boolean;
@@ -18,10 +11,16 @@ interface EnvConfig {
   whitelist?: string[];
 }
 
+if (!process.env.NODE_ENV) {
+  process.env.NODE_ENV = 'development';
+}
+
+const isDev = (process.env.NODE_ENV !== 'production');
+
 export default <EnvConfig> makeConfig({
-  isProd: !isDev,
   isDev,
-  isVerbose,
+  isProd: !isDev,
+  isVerbose: false,
   whitelist: [
     'NODE_ENV',
   ],

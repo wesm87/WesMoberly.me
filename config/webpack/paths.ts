@@ -22,5 +22,6 @@ export default <PathConfig> makeConfig({
   source: path.join(rootPath, 'src'),
   dest: path.join(rootPath, 'build'),
   config: path.join(rootPath, 'config'),
+  test: path.join(rootPath, 'test'),
   modules: path.join(rootPath, 'node_modules'),
 });

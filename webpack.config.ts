@@ -12,8 +12,10 @@ import loaderOptions from './config/webpack/loader-options';
 import devServerConfig from './config/webpack/dev-server';
 
 const combineLoaders = require('webpack-combine-loaders');
+const nodeExternals = require('webpack-node-externals');
 const AssetsPlugin = require('assets-webpack-plugin');
 const StatsPlugin = require('stats-webpack-plugin');
+const TSLintPlugin = require('tslint-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const EnvironmentPlugin = require('inline-environment-variables-webpack-plugin');
 const VendorChunkPlugin = require('webpack-vendor-chunk-plugin');
@@ -53,13 +55,6 @@ function styleLoaders(type = 'sass') {
 
   return [styleLoader, loaders];
 }
-
-const nodeModules = {};
-fs.readdirSync(path.join(__dirname, 'node_modules'))
-  .filter((x) => ['.bin'].indexOf(x) === -1)
-  .forEach((mod) => {
-    nodeModules[mod] = `commonjs ${mod}`;
-  });
 
 
 //
@@ -182,6 +177,12 @@ const config = {
       chunkModules: true,
       exclude: [/node_modules/],
     }),
+    new TSLintPlugin({
+      files: [
+        "${paths.source}/**/*.ts",
+        "${paths.test}/**/*.ts",
+      ],
+    })
   ],
 
   development: {
@@ -285,7 +286,6 @@ const clientConfig = merge({}, clientConfigBase, makeConfig({
         filename: 'css/main.css',
         allChunks: true,
       }),
-      new webpack.optimize.OccurrenceOrderPlugin(),
       new webpack.optimize.UglifyJsPlugin({
         compress: {
           screw_ie8: true,
@@ -320,9 +320,7 @@ const serverConfig = merge({}, config, {
     libraryTarget: 'commonjs2',
   },
   target: 'node',
-  externals: {
-    assets: 'assets',
-  },
+  externals: [nodeExternals()],
   node: {
     console: false,
     global: false,

@@ -1,6 +1,6 @@
 
 declare module 'webpack' {
-  import * as UglifyJS from 'uglify-js';
+  import { MinifyOptions } from 'uglify-js';
 
   type LoaderOptions = {
     options: {
@@ -31,7 +31,7 @@ declare module 'webpack' {
   }
 
   interface UglifyJsPlugin {
-    new(options?: UglifyJS.MinifyOptions): Plugin;
+    new(options?: MinifyOptions): Plugin;
   }
 
   interface CommonsChunkPlugin {
@@ -50,7 +50,6 @@ declare module 'webpack' {
     optimize: {
       UglifyJsPlugin: UglifyJsPlugin,
       CommonsChunkPlugin: CommonsChunkPlugin,
-      OccurrenceOrderPlugin: OccurrenceOrderPlugin,
     };
   }
 

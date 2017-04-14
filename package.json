@@ -4,8 +4,8 @@
     "node": ">= 6.0"
   },
   "scripts": {
-    "lint": "eslint src tools",
-    "test": "eslint src && jest",
+    "lint": "tslint src tools",
+    "test": "jest",
     "clean": "ts-node tools/run clean",
     "copy": "ts-node tools/run copy",
     "bundle": "ts-node tools/run bundle",
@@ -20,7 +20,7 @@
       "<rootDir>/../test/"
     ],
     "moduleNameMapper": {
-      "\\.scss$": "SCSSStub"
+      "\\.(css|scss)$": "identity-obj-proxy"
     },
     "unmockedModulePathPatterns": [
       "react",
@@ -93,7 +93,7 @@
     "@types/material-ui": "^0.16.46",
     "@types/mkdirp": "^0.3.29",
     "@types/mz": "^0.0.30",
-    "@types/ncp": "^0.5.29",
+    "@types/ncp": "^2.0.0",
     "@types/node": "^6.0.51",
     "@types/node-fetch": "^1.6.5",
     "@types/passport": "^0.3.1",
@@ -147,6 +147,7 @@
     "gaze": "^1.1.2",
     "git-repository": "^0.1.1",
     "glob": "^7.0.3",
+    "identity-obj-proxy": "^3.0.0",
     "inline-environment-variables-webpack-plugin": "^1.1.0",
     "jest-cli": "^18.1.0",
     "json-loader": "^0.5.4",
@@ -185,6 +186,7 @@
     "tslint-eslint-rules": "^3.0.0",
     "tslint-loader": "^3.3.0",
     "tslint-react": "^2.0.0",
+    "tslint-webpack-plugin": "^0.1.1",
     "typescript": "^2.1.1",
     "typescript-require": "^0.2.9",
     "unlazy-loader": "^0.1.2",
@@ -192,6 +194,7 @@
     "webpack": "^2.1.0-beta",
     "webpack-combine-loaders": "^2.0.3",
     "webpack-dev-server": "^2.1.0-beta.11",
+    "webpack-node-externals": "^1.5.4",
     "webpack-vendor-chunk-plugin": "^1.0.0"
   }
 }

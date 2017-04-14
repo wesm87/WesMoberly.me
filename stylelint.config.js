@@ -14,7 +14,10 @@ module.exports = {
       ignoreAtRules: [
         'if',
         'for',
+        'each',
+        'while',
         'media',
+        'at-root',
       ],
     }],
     'declaration-block-properties-order': [

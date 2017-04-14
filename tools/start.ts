@@ -2,7 +2,7 @@
 
 import webpack from 'webpack';
 import * as WebpackDevServer from 'webpack-dev-server';
-import { config } from '../webpack.config';
+import { clientConfig } from '../webpack.config';
 import run from './run';
 import clean from './clean';
 import copy from './copy';
@@ -18,20 +18,20 @@ async function start() {
   await run(clean);
   await run(copy.bind(undefined, { watch: true }));
   await new Promise((resolve) => {
-    const bundler = webpack(config);
+    const bundler = webpack(clientConfig);
     const serverHost = 'localhost';
-    const serverPort = 3000;
-    const serverURL = makeURL(serverHost, serverPort);
     const webpackHost = serverHost;
+    const serverPort = 3000;
     const webpackPort = 3001;
+    const serverURL = makeURL(serverHost, serverPort);
     const webpackURL = makeURL(webpackHost, webpackPort);
 
 
     new WebpackDevServer(bundler, {
       hot: true,
       historyApiFallback: true,
-      publicPath: config.output.publicPath,
-      contentBase: config.output.path,
+      publicPath: clientConfig.output.publicPath,
+      contentBase: clientConfig.output.path,
       proxy: {
         '*': serverURL,
       },
